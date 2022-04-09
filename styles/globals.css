@@ -1,9 +1,36 @@
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'lato';
+  src: url('../public/fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: 'normal';
+}
+
+@font-face {
+  font-family: 'amsi-procond';
+  src: url('../public/fonts/amsiprocond-bold.otf') format('opentype');
+  font-weight: 'normal';
+}
+
+@font-face {
+  font-family: 'lobster';
+  src: url('../public/fonts/Lobster-Regular.ttf') format('truetype');
+  font-weight: 'normal';
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: amsi-procond;
+}
+
+#__next {
+  flex: 1 1 auto;
 }
 
 a {
@@ -11,6 +38,22 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%;
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%;
+  }
 }

@@ -6,7 +6,7 @@ export default class MyDocument extends Document{
             <Html lang="pt-br">
                 <Head>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-                    <link rel="shortcut icon" href="images/casal.png" type="image/png" /> 
+                    <link rel="shortcut icon" href="images/casal.png" type="images/png" /> 
                 </Head>
                 <body>
                     <Main />

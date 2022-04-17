@@ -5,20 +5,26 @@
 }
 
 @font-face {
-  font-family: 'lato';
-  src: url('../public/fonts/Lato-Regular.ttf') format('truetype');
+  font-family: 'Abel-Text-Secondary';
+  src: url('../public/fonts/Abel-Regular.ttf') format('truetype');
   font-weight: 'normal';
 }
 
 @font-face {
-  font-family: 'amsi-procond';
-  src: url('../public/fonts/amsiprocond-bold.otf') format('opentype');
+  font-family: 'BeauRivage-Text-Main';
+  src: url('../public/fonts/BeauRivage-Regular.ttf') format('truetype');
   font-weight: 'normal';
 }
 
 @font-face {
-  font-family: 'lobster';
-  src: url('../public/fonts/Lobster-Regular.ttf') format('truetype');
+  font-family: 'Philospher-Header';
+  src: url('../public/fonts/Philosopher-Italic.ttf') format('truetype');
+  font-weight: 'normal';
+}
+
+@font-face {
+  font-family: 'HoneyFlorist';
+  src: url('../public/fonts/Honey-Florist-Personal-Use.otf') format('opentype');
   font-weight: 'normal';
 }
 
@@ -26,7 +32,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: amsi-procond;
+  font-family: Abel-Text-Secondary;
 }
 
 #__next {

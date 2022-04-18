@@ -4,6 +4,7 @@ import { convertMonthsToDays } from '../../data/utils/convertMonthToDays';
 import CounterForTheDay from './CounterForTheDay';
 import { HeaderCountDown } from './HeaderCountDown';
 import { TextCounterSection } from './TextCounterSection';
+import { BannerSection } from './BannerSection';
 
 export type CounterDate = {
     day: number | null;
@@ -21,7 +22,6 @@ const CountDown: React.FC = () => {
     });
     const weddingDate = new Date(2022, 4, 29, 15, 30, 0);
     const refTime = useRef({});
-
     useEffect(() => {
         if (refTime && refTime.current) {
             clearInterval(Number(refTime.current));
@@ -44,15 +44,16 @@ const CountDown: React.FC = () => {
             width="100vw"
             height="auto"
             padding="5%"
-        >
+            >
             <HeaderCountDown />
             <CounterForTheDay
                 day={counterDate.day}
                 hour={counterDate.hour}
                 minutes={counterDate.minutes}
                 seconds={counterDate.seconds}
-            />
-            <TextCounterSection /> 
+                />
+            <TextCounterSection />
+            <BannerSection />
         </Box>
     );
 }

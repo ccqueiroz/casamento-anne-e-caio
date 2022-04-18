@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 import { convertMonthsToDays } from '../../data/utils/convertMonthToDays';
 import CounterForTheDay from './CounterForTheDay';
 import { HeaderCountDown } from './HeaderCountDown';
@@ -54,6 +54,13 @@ const CountDown: React.FC = () => {
                 />
             <TextCounterSection />
             <BannerSection />
+            <Image
+                src="/images/layout/conchas-top.png" width="284px" height={{
+                lg:'70px',
+                '2xl': '86px'
+                }} alt="imagens de conchas" margin="0 auto"
+                objectFit="contain"
+            />
         </Box>
     );
 }

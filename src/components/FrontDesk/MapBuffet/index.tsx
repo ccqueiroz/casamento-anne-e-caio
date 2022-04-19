@@ -25,7 +25,7 @@ const MapBuffet: React.FC = () => {
             infowindow.open({
                 anchor: marker,
                 map,
-                shouldFocus: true,
+                shouldFocus: false,
             });
             centerControlDiv.style.display = "none"
         })

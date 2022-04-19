@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
-import { TextComponent } from './TextComponent';
+import { TextComponent } from '../../TextComponent';
 
 const TextCounterSection: React.FC = () => {
 

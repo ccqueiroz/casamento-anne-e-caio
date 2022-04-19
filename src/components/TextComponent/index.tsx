@@ -13,6 +13,7 @@ const TextComponent: React.FC<TextComponentProps> = ({
     fontSize="1.2rem",
     lineHeight = "1.8rem",
     textIndent = 50,
+    textAlign="justify",
     ...rest
 }) => {
     
@@ -22,7 +23,7 @@ const TextComponent: React.FC<TextComponentProps> = ({
             fontSize={fontSize}
             lineHeight={lineHeight}
             letterSpacing={letterSpacing}
-            textAlign="justify"
+            textAlign={textAlign}
             style={{ textIndent }}
             {...rest}
         >

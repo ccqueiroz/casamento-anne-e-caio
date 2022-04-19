@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react'
 import { Hero } from '../Hero';
 import { CountDown } from '../CountDownSection';
+import { FrontDesk } from '../FrontDesk';
 const Layout: React.FC = () => {
     return (
         <Box
@@ -12,6 +13,7 @@ const Layout: React.FC = () => {
         >
             <Hero />
             <CountDown />
+            <FrontDesk/>
         </Box>
     );
 }

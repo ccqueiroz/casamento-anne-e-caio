@@ -1,11 +1,11 @@
 import React from 'react';
 import { HeaderDividerComponent } from '../../HeaderDividerComponent';
 
-const HeaderCountDown: React.FC = () => {
+const HeaderFrontDesk: React.FC = () => {
     
     return (
-        <HeaderDividerComponent text="contagem regressiva" />
+        <HeaderDividerComponent text="recepção" />
     );
 }
 
-export { HeaderCountDown }
+export { HeaderFrontDesk }

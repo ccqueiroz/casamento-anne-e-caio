@@ -47,7 +47,7 @@ const DressCodeImages: React.FC = () => {
                 },
                 boxShadow:"1px 3px 5px 2px rgba(74, 97, 97, 0.5)",
                 right: {
-                    base: "0%",
+                    base: "-5%",
                     lg:"-10px",
                     xl:"-15px"
                 },
@@ -55,7 +55,7 @@ const DressCodeImages: React.FC = () => {
         >
             <Box
                 height={{
-                    base: "auto",
+                    base: "300px",
                     lg:"400px",
                     xl:"444px"
                 }}
@@ -68,13 +68,13 @@ const DressCodeImages: React.FC = () => {
                     src="/images/dresscode-ele.png"
                     alt="dress code para ele"
                     height="95%"
-                    objectFit="cover"
+                    objectFit="contain"
                     objectPosition="top"
                 />
             </Box>
             <Box
                 height={{
-                    base: "auto",
+                    base: "300px",
                     lg:"400px",
                     xl:"444px"
                 }} 

@@ -33,9 +33,7 @@ const ContentTexts: React.FC = () => {
                 <TextComponent
                     text="Blusa, calça e sapato social. Terno e gravata é opcional. Lembrando que é um ambiente aberto, próximo à praia. Vá à vontade, mas seguindo as sugestões anteriores."
                     fontSize={{
-                        base:"1rem",
-                        // lg:"0.85rem",
-                        
+                        base:"1rem",                        
                     }}
                     lineHeight="1.5rem"
                     wordBreak="break-word"
@@ -54,9 +52,7 @@ const ContentTexts: React.FC = () => {
                 <TextComponent
                     text="Sugerimos vestidos leves, midi/curto. Lembre-se que o ambiente é aberto, próximo à praia, com muita grama, então invista em saltos mais baixos ou quadrados para seu conforto."
                     fontSize={{
-                        base:"1rem",
-                        // lg:"0.85rem",
-                        
+                        base:"1rem",                        
                     }}
                     lineHeight="1.5rem"
                     wordBreak="break-word"

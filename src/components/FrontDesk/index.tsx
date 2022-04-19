@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { BuffetPresentation } from './BuffetPresentation';
 import { HeaderFrontDesk } from './HeaderFrontDesk';
+import { MapBuffet } from './MapBuffet';
 
 const FrontDesk: React.FC = () => {
 
@@ -12,7 +13,8 @@ const FrontDesk: React.FC = () => {
             padding="1% 5% 1%"
             >
             <HeaderFrontDesk />
-            <BuffetPresentation/>
+            <BuffetPresentation />
+            <MapBuffet/>
         </Box>
     );
 }

@@ -43,7 +43,7 @@ const MapBuffet: React.FC = () => {
                 md:"60%"
             }}
             maxWidth="600px"
-            margin="0 auto"
+            margin="0 auto 2.5rem"
             height="350px"
             borderRadius="20px"
             overflow="hidden"

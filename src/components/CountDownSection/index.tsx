@@ -43,7 +43,7 @@ const CountDown: React.FC = () => {
         <Box
             width="100vw"
             height="auto"
-            padding="5%"
+            padding="1% 5%"
             >
             <HeaderCountDown />
             <CounterForTheDay
@@ -60,6 +60,7 @@ const CountDown: React.FC = () => {
                 '2xl': '86px'
                 }} alt="imagens de conchas" margin="0 auto"
                 objectFit="contain"
+                objectPosition="bottom"
             />
         </Box>
     );

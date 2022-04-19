@@ -1,22 +1,20 @@
-import { Box, Image } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { ImagesFooterSection } from '../ImagesFooterSection';
-import { BuffetPresentation } from './BuffetPresentation';
-import { HeaderFrontDesk } from './HeaderFrontDesk';
-import { MapBuffet } from './MapBuffet';
+import { DressCodeInformations } from './DressCodeInformations';
+import { HeaderDressCode } from './HeaderDressCode';
 
-const FrontDesk: React.FC = () => {
+const DressCode: React.FC = () => {
 
     return (
         <Box
             as="section"
             width="100vw"
             height="auto"
-            padding="1% 5% 0%"
+            padding="1% 5% 1%"
         >
-            <HeaderFrontDesk />
-            <BuffetPresentation />
-            <MapBuffet />
+            <HeaderDressCode />
+            <DressCodeInformations />
             <ImagesFooterSection
                 srcImage="/images/layout/concha-titulo.png"
                 altimage="imagens de conchas"
@@ -25,4 +23,4 @@ const FrontDesk: React.FC = () => {
     );
 }
 
-export { FrontDesk }
+export { DressCode }

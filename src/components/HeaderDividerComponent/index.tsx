@@ -18,19 +18,21 @@ const HeaderDividerComponent: React.FC<HeaderDividerComponentProps> = ({
             justifyContent="center"
             alignItems="center"
         >
-            <Divider width="35%" display={{ base: 'none', lg:'inline-block'}} bg="text.secondary" height="1px"/>
-            <Text fontSize={{
-                base: '1.25rem',
-                lg:'1.725rem'
-            }}
-            color="text.secondary"
+            <Divider flexShrink={1} display={{ base: 'none', lg:'inline-block'}} bg="text.secondary" height="1px"/>
+            <Text
+                fontSize={{
+                    base: '1.25rem',
+                    lg:'1.725rem'
+                }}
+                color="text.secondary"
                 fontWeight="bold"
+                minWidth="18%"
                 flexShrink={1}
                 textAlign="center"
             >
                 {text.toUpperCase()}
             </Text>
-            <Divider width="35%" display={{ base: 'none', lg:'inline-block'}} bg="text.secondary" height="1px"/>
+            <Divider flexShrink={1} display={{ base: 'none', lg:'inline-block'}} bg="text.secondary" height="1px"/>
         </Box>
     );
 }

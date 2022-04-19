@@ -5,6 +5,7 @@ import CounterForTheDay from './CounterForTheDay';
 import { HeaderCountDown } from './HeaderCountDown';
 import { TextCounterSection } from './TextCounterSection';
 import { BannerSection } from './BannerSection';
+import { ImagesFooterSection } from '../ImagesFooterSection';
 
 export type CounterDate = {
     day: number | null;
@@ -41,10 +42,11 @@ const CountDown: React.FC = () => {
 
     return (
         <Box
+            as="section"
             width="100vw"
             height="auto"
             padding="1% 5%"
-            >
+        >
             <HeaderCountDown />
             <CounterForTheDay
                 day={counterDate.day}
@@ -54,13 +56,9 @@ const CountDown: React.FC = () => {
                 />
             <TextCounterSection />
             <BannerSection />
-            <Image
-                src="/images/layout/conchas-top.png" width="284px" height={{
-                lg:'70px',
-                '2xl': '86px'
-                }} alt="imagens de conchas" margin="0 auto"
-                objectFit="contain"
-                objectPosition="bottom"
+            <ImagesFooterSection
+                srcImage="/images/layout/conchas-top.png"
+                altimage="imagens de conchas"
             />
         </Box>
     );

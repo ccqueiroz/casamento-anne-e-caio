@@ -25,9 +25,13 @@ const MapBuffet: React.FC = () => {
             infowindow.open({
                 anchor: marker,
                 map,
-                shouldFocus: false,
+                shouldFocus: true,
             });
+            centerControlDiv.style.display = "none"
         })
+        google.maps.event.addListener(map, 'click', function () {
+            infowindow.close();
+        });
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

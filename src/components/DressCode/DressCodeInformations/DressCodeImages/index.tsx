@@ -6,7 +6,10 @@ const DressCodeImages: React.FC = () => {
     return (
         <Flex
             width="auto"
-            minWidth="48%"
+            minWidth={{
+                base: '45%',
+                xl:'40%'
+            }}
             height={{
                 base: "auto",
                 lg:'350px',
@@ -15,7 +18,7 @@ const DressCodeImages: React.FC = () => {
             justifyContent="flex-end"
             margin={{
                 base: "0 auto",
-                xl:"0 auto"
+                lg:"0 2% 0 auto"
             }}
             gap={{
                 base: "1rem",

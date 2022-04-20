@@ -13,7 +13,7 @@ const BuffetPresentation: React.FC = () => {
                 src="/images/atlantis-buffet.jpg"
                 alt="buffet espaço atlantis"
                 height={{
-                    base: '250px',
+                    base: '300px',
                     md: '450px',
                     lg: '480px',
                     '2xl':'500px'

@@ -26,29 +26,28 @@ const DressCodeImages: React.FC = () => {
             _before={{
                 content: "''",
                 width: {
-                    base: "80%",
+                    base: "38%",
                     lg:"35%",
                     xl:"160px"
                 },
                 height: {
-                    base: "calc(100% + 2.5%)",
-                    md:"calc(100% + 2.5%)",
+                    base: "53%",
+                    md:"53%",
                     lg:"200px",
                     xl: "230px"
                 },
-                backgroundImage: "linear-gradient(45deg, #93c2c2, #aadae9, #d6eef5, #aadae9)",
+                backgroundImage: "linear-gradient(270deg, #93c2c2, #aadae9, #93d1e4, #d6eef5)",
                 zIndex: -1,
                 filter:"opacity(0.8)",
                 position: "absolute",
                 top: {
                     base: "-4%",
-                    md:"-4%",
                     xl:"-15px"
                 },
                 boxShadow:"1px 3px 5px 2px rgba(74, 97, 97, 0.5)",
                 right: {
-                    base: "-5%",
-                    lg:"-10px",
+                    base: "-4.5%",
+                    lg:"-13px",
                     xl:"-15px"
                 },
             }}
@@ -59,9 +58,38 @@ const DressCodeImages: React.FC = () => {
                     lg:"400px",
                     xl:"444px"
                 }}
+                position="relative"
                 margin={{
                     base: "0",
                     lg: "2rem 1rem 0 0"
+                }}
+                _before={{
+                    content: "''",
+                    width: {
+                        base:"81%",
+                        lg:"78%",
+                    },
+                    maxWidth:"175px",
+                    height: {
+                        base:"53%",
+                        lg:"55%",
+                    },
+                    maxHeight:"240px",
+                    backgroundImage: "linear-gradient(45deg, #0c6a6b, #93c2c2, #aadae9, #d6eef5)",
+                    zIndex: -1,
+                    filter:"opacity(0.8)",
+                    position: "absolute",
+                    bottom: {
+                        base: "1%",
+                        lg:"2%",
+                        xl:"2%"
+                    },
+                    boxShadow:"1px 3px 5px 2px rgba(74, 97, 97, 0.5)",
+                    left: {
+                        base: "-10%",
+                        lg:"-13px",
+                        xl:"-15px"
+                    },
                 }}
             >
                 <Image
@@ -70,6 +98,8 @@ const DressCodeImages: React.FC = () => {
                     height="95%"
                     objectFit="contain"
                     objectPosition="top"
+                    boxShadow="1px 3px 5px 2px rgba(74, 97, 97, 0.5)"
+                    borderRadius="5px"
                 />
             </Box>
             <Box
@@ -85,6 +115,8 @@ const DressCodeImages: React.FC = () => {
                     height="95%"
                     objectFit="contain"
                     objectPosition="top"
+                    boxShadow="1px 3px 5px 2px rgba(74, 97, 97, 0.5)"
+                    borderRadius="5px"
                 />
             </Box>
         </Flex>

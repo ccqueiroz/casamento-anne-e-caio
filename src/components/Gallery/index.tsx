@@ -1,8 +1,9 @@
-import { Box, Grid, GridItem, Image  } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Image } from '@chakra-ui/react';
 import React from 'react';
 import { Gallery, Photo } from '../../data/model/Gallery';
 
-const Gallery: React.FC<Gallery> = ({photos}) => {
+const Gallery: React.FC<Gallery> = ({ photos }) => {
+
     return (
         <Box
             backgroundImage="linear-gradient(45deg, #0c6a6b, #93c2c2, #aadae9, #d6eef5, #0c6a6b)"
@@ -33,6 +34,7 @@ const Gallery: React.FC<Gallery> = ({photos}) => {
                                     objectPosition={photo.objectPosition}
                                     width={photo.width}
                                     height={photo.height}
+                                    loading="lazy"
                                     {...photo}
                                 />
                             </GridItem>

@@ -96,7 +96,7 @@ const DressCodeImages: React.FC = () => {
                 }}
             >
                 <Image
-                    src="/images/dresscode-ele.png"
+                    src="/images/dresscode-ele.jpg"
                     alt="dress code para ele"
                     height="95%"
                     objectFit="contain"
@@ -113,7 +113,7 @@ const DressCodeImages: React.FC = () => {
                 }} 
             >
                 <Image
-                    src="/images/dresscode-ela.png"
+                    src="/images/dresscode-ela.jpg"
                     alt="dress code para ela"
                     height="95%"
                     objectFit="contain"

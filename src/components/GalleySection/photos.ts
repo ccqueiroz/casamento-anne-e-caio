@@ -18,7 +18,8 @@ export const photos: Array<Photo> = [
             objectFit:{
                 base: 'cover',
                 lg: 'cover'
-        }
+        },
+        alt:"Anne e Caio com Puck"
     },
     {
         src: "/images/IMG_6604.JPG",
@@ -40,7 +41,8 @@ export const photos: Array<Photo> = [
         },
         objectPosition: {
             md:"50% 40%"
-        }
+        },
+        alt:"Anne e Caio casamento civil"
     },
     {
         src: "/images/IMG_6602.JPG",
@@ -59,7 +61,8 @@ export const photos: Array<Photo> = [
         objectFit:{
             base: 'cover',
             lg: 'cover'
-        }
+        },
+        alt:"Anne e Caio casamento civil"
     },
     {
         src: "/images/IMG_6601.JPG",
@@ -77,7 +80,8 @@ export const photos: Array<Photo> = [
         objectFit:{
             base: 'cover',
             lg: 'cover'
-        }
+        },
+        alt:"Anne e Caio, foto do casamento civil"
     },
     {
         src: "/images/casal4.JPG",
@@ -98,7 +102,8 @@ export const photos: Array<Photo> = [
         objectPosition: {
             base:"100% 50%",
             md:"50% 40%"
-        }
+        },
+        alt:"Anne e Caio com puck no gramado"
     },
 
     {
@@ -117,6 +122,7 @@ export const photos: Array<Photo> = [
         objectFit:{
             base: 'cover',
             lg: 'cover'
-        }
+        },
+        alt:"Anne e Caio, foto do casamento civil"
     },
 ]

@@ -1,13 +1,13 @@
-import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { ImagesFooterSection } from '../ImagesFooterSection';
+import { WrapperSections } from '../WrapperSections';
 import { DressCodeInformations } from './DressCodeInformations';
 import { HeaderDressCode } from './HeaderDressCode';
 
 const DressCode: React.FC = () => {
 
     return (
-        <Box
+        <WrapperSections
             as="section"
             width="100vw"
             height="auto"
@@ -19,7 +19,7 @@ const DressCode: React.FC = () => {
                 srcImage="/images/layout/concha-titulo.png"
                 altimage="imagens de conchas"
             />
-        </Box>
+        </WrapperSections>
     );
 }
 

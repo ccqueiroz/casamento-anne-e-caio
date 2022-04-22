@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Image } from '@chakra-ui/react';
 import { convertMonthsToDays } from '../../data/utils/convertMonthToDays';
 import CounterForTheDay from './CounterForTheDay';
 import { HeaderCountDown } from './HeaderCountDown';
 import { TextCounterSection } from './TextCounterSection';
 import { BannerSection } from './BannerSection';
 import { ImagesFooterSection } from '../ImagesFooterSection';
+import { WrapperSections } from '../WrapperSections';
 
 export type CounterDate = {
     day: number | null;
@@ -41,7 +41,7 @@ const CountDown: React.FC = () => {
     }, [])
 
     return (
-        <Box
+        <WrapperSections
             as="section"
             width="100vw"
             height="auto"
@@ -60,7 +60,7 @@ const CountDown: React.FC = () => {
                 srcImage="/images/layout/conchas-top.png"
                 altimage="imagens de conchas"
             />
-        </Box>
+        </WrapperSections>
     );
 }
 

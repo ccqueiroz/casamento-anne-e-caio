@@ -1,17 +1,14 @@
 import React from 'react';
 import { ImagesFooterSection } from '../ImagesFooterSection';
 import { WrapperSections } from '../WrapperSections';
-import { BuffetPresentation } from './BuffetPresentation';
-import { HeaderFrontDesk } from './HeaderFrontDesk';
-import { MapBuffet } from './MapBuffet';
+import { ContentGifftList } from './ContentGifftList';
+import { HeaderGifftList } from './HeaderGifftList';
 
-const FrontDesk: React.FC = () => {
-
+const GifftList: React.FC = () => {
     return (
         <WrapperSections>
-            <HeaderFrontDesk />
-            <BuffetPresentation />
-            <MapBuffet />
+            <HeaderGifftList />
+            <ContentGifftList />
             <ImagesFooterSection
                 srcImage="/images/layout/concha-titulo.png"
                 altimage="imagens de conchas"
@@ -19,5 +16,4 @@ const FrontDesk: React.FC = () => {
         </WrapperSections>
     );
 }
-
-export { FrontDesk }
+export { GifftList }

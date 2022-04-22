@@ -4,6 +4,7 @@ import { Hero } from '../Hero';
 import { CountDown } from '../CountDownSection';
 import { FrontDesk } from '../FrontDesk';
 import { DressCode } from '../DressCode';
+import { GifftList } from '../GifftList';
 const Layout: React.FC = () => {
     return (
         <Box
@@ -16,6 +17,7 @@ const Layout: React.FC = () => {
             <CountDown />
             <FrontDesk />
             <DressCode />
+            <GifftList/>
         </Box>
     );
 }

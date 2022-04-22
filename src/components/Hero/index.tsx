@@ -1,13 +1,14 @@
 import { Box, Image } from '@chakra-ui/react';
 import React from 'react';
 import { Menu } from '../Menu';
+import { WrapperSections } from '../WrapperSections';
 import { EngagedAndDate } from './EngagedAndDate';
 const textShadow = `0.1rem 0.1rem 0.4rem`
 
 const Hero: React.FC = () => {
 
     return (
-        <Box
+        <WrapperSections
             width="100vw"
             height={{
                 base: '460px',
@@ -70,7 +71,7 @@ const Hero: React.FC = () => {
                 />
                 <EngagedAndDate/>
             </Box>
-        </Box>
+        </WrapperSections>
     )
 
 }

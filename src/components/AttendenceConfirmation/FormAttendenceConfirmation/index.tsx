@@ -10,10 +10,11 @@ import {
     RadioGroup,
     Text,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 import { Input } from '../../Form/Input';
 import InputMask from 'react-input-mask';
-import { SubmitHandler, useForm, Controller, FieldError } from 'react-hook-form'
+import { SubmitHandler, useForm, Controller } from 'react-hook-form'
+import { isPhone } from 'brazilian-values';
 import { UserModel } from '../../../data/model/User';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -21,29 +22,42 @@ import * as yup from 'yup';
 const FormAttendenceConfirmation: React.FC = () => {
   const signUpFormSchema = yup.object().shape({
     phone: yup
-      .string()
-      .required("Por favor, informe seu telefone (whatsapp)"),
+          .string()
+          .test('phone', 'Informe um número de telefone válido', (phone: string | undefined) => isPhone(phone || ''))
+        .required("Por favor, informe seu telefone (whatsapp)"),
     email: yup.string().email("E-mail inválido. Por favor, informe um e-mail válido").required("Por favor, informe seu e-mail"),
     presenceAtTheEvent: yup.string().required('Por favor, informe se você poderá comparecer ao evento.')
   })
     const {
         register,
         handleSubmit,
-        reset,
-        trigger,
         setValue,
         getValues,
         control,
         clearErrors,
-    formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting },
     } = useForm<UserModel>({
-    resolver: yupResolver<yup.AnyObjectSchema>(signUpFormSchema),
-  })
+        resolver: yupResolver<yup.AnyObjectSchema>(signUpFormSchema),
+    });
+
+    const handleOnChangeRadioGroup = useCallback((event: string): void => {
+        setValue('presenceAtTheEvent', event)
+        clearErrors(['presenceAtTheEvent'])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const submit: SubmitHandler<UserModel> = useCallback((data) => {
+        console.log('data => ', data)
+        setTimeout(() => console.log(''), 2000)
+    }, []);
+
     return (
         <Box
             width="100%"
             maxWidth="700px"
             margin="2rem auto 0.5rem"
+            as="form"
+            onSubmit={handleSubmit(submit)}
         >
             <FormControl
                 width="80%"
@@ -70,7 +84,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                         render={({ field: { onChange, value } }) => (
                             <InputMask
                                 mask="(99) 9 9999-9999"
-                                onChange={(e) => onChange(e.target.value)}
+                                onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event.target.value)}
                                 value={value}
                             >
                                 {() => (
@@ -99,46 +113,44 @@ const FormAttendenceConfirmation: React.FC = () => {
                                     letterSpacing="0.2rem"
                                     color="text.tertiary"
                                     fontSize={{base:"1rem", md:"1.25rem"}}
-
                                 >
                                     Você irá comparecer ao evento?
                                 </Text>
                             </FormLabel>
                             <RadioGroup
                                 value={getValues('presenceAtTheEvent')}
-                                onChange={() => {}}
+                                onChange={handleOnChangeRadioGroup}
                             >
-                            <Radio
-                                value="Y"
-                                pb={3}
-                                {...register('presenceAtTheEvent')}
+                                <Radio
+                                    value="Y"
+                                    pb={3}
+                                    {...register('presenceAtTheEvent')}
 
-                            >
-                                <Text
-                                    colorScheme="text.secondary"
-                                    letterSpacing="0.2rem"
-                                    color="text.tertiary"
-                                    fontSize={{base:"1rem", md:"1.25rem"}}
                                 >
-                                    Sim
-                                </Text>
-                            </Radio>
-                            <Radio
-                                ml="5rem"
-                                value="N"
-                                pb={3}
-                                colorScheme="cyan.200"
-                                {...register('presenceAtTheEvent')}
-                            >
-                                <Text
-                                    colorScheme="text.secondary"
-                                    letterSpacing="0.2rem"
-                                    color="text.tertiary"
-                                    fontSize={{base:"1rem", md:"1.25rem"}}
+                                    <Text
+                                        colorScheme="text.secondary"
+                                        letterSpacing="0.2rem"
+                                        color="text.tertiary"
+                                        fontSize={{base:"1rem", md:"1.25rem"}}
+                                    >
+                                        Sim
+                                    </Text>
+                                </Radio>
+                                <Radio
+                                    value="N"
+                                    ml="5rem"
+                                    pb={3}
+                                    {...register('presenceAtTheEvent')}
                                 >
-                                    Não
-                                </Text>
-                            </Radio>
+                                    <Text
+                                        colorScheme="text.secondary"
+                                        letterSpacing="0.2rem"
+                                        color="text.tertiary"
+                                        fontSize={{base:"1rem", md:"1.25rem"}}
+                                    >
+                                        Não
+                                    </Text>
+                                </Radio>
                             </RadioGroup>
                             {!!errors.presenceAtTheEvent && (
                                 <FormErrorMessage>
@@ -154,6 +166,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                     margin="0 auto"
                 >
                     <Button
+                        type="submit"
                         margin="0 auto"
                         padding="5%"
                         fontWeight="bold"
@@ -163,6 +176,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                         background="linear-gradient(45deg, #aadae9, #d6eef5)"
                         transition="background 300ms easy-in-out"
                         boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
+                        isLoading={isSubmitting}
                         _hover={{
                             backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
                         }}

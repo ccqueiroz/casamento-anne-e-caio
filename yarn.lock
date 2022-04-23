@@ -1246,6 +1246,11 @@
   dependencies:
     "fill-range" "^7.0.1"
 
+"brazilian-values@^0.10.1":
+  "integrity" "sha512-HruDLDug8oD2lydSEP/L7JJTNcgwTH2uIdXUQKRKjwqHDMbSsJ0Hxi5GOJwxPYBrAx2a6RZXnUbG8krjbw4GGw=="
+  "resolved" "https://registry.npmjs.org/brazilian-values/-/brazilian-values-0.10.1.tgz"
+  "version" "0.10.1"
+
 "browserslist@^4.17.5":
   "integrity" "sha512-CQOBCqp/9pDvDbx3xfMi+86pr4KXIf2FDkTTdeuYw8OxS9t898LA1Khq57gtufFILXpfgsSx5woNgsBgvGjpsA=="
   "resolved" "https://registry.npmjs.org/browserslist/-/browserslist-4.20.2.tgz"

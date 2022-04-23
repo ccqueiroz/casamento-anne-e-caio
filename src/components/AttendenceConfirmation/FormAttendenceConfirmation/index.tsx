@@ -43,7 +43,7 @@ const FormAttendenceConfirmation: React.FC = () => {
         <Box
             width="100%"
             maxWidth="700px"
-            margin="2rem auto"
+            margin="2rem auto 0.5rem"
         >
             <FormControl
                 width="80%"

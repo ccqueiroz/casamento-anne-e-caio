@@ -19,7 +19,7 @@ const InstagramIcon: React.FC = () => {
             _hover={{
                 filter:"opacity(0.8)"
             }}
-            borderRadius="30%"
+            borderRadius="20%"
             position="relative"
             boxShadow="10px 2px 8px 1px rgba(0, 0, 0, 0.2)"
             _before={{
@@ -37,10 +37,10 @@ const InstagramIcon: React.FC = () => {
             }}
             _after={{
                 content: "''",
-                border: "3px solid white",
-                borderRadius: "30%",
-                width: "0.9rem",
-                height: "0.9rem",
+                border: "2.5px solid white",
+                borderRadius: "50%",
+                width: "0.97rem",
+                height: "0.97rem",
                 top: "50%",
                 left: "50%",
                 transform:"translate(-50%, -50%)",
@@ -50,12 +50,12 @@ const InstagramIcon: React.FC = () => {
         >
             <Box
                 as="span"
-                border="16px solid #fffff"
+                border="1.5px solid white"
                 borderRadius="100%"
                 width="0"
                 height="0"
-                right="0.625rem"
-                top="0.625rem"
+                right="0.615rem"
+                top="0.66rem"
                 position="absolute"
                 margin="auto"
             />

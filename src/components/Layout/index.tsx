@@ -6,6 +6,7 @@ import { FrontDesk } from '../FrontDesk';
 import { DressCode } from '../DressCode';
 import { GifftList } from '../GifftList';
 import { GallerySection } from '../GalleySection';
+import { AttendenceConfirmation } from '../AttendenceConfirmation';
 const Layout: React.FC = () => {
     return (
         <Box
@@ -20,6 +21,7 @@ const Layout: React.FC = () => {
             <DressCode />
             <GifftList />
             <GallerySection />
+            <AttendenceConfirmation />
         </Box>
     );
 }

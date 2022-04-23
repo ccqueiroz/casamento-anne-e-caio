@@ -1,5 +1,6 @@
 import { FieldError } from 'react-hook-form';
-import { TiTime } from 'react-icons/ti'
+import { FaWhatsapp } from "react-icons/fa";
+import { AiOutlineMail } from "react-icons/ai";
 
 import {
   FormControl,
@@ -11,6 +12,7 @@ import {
   InputProps as ChakraInputProps,
   InputLeftElement,
 } from '@chakra-ui/react'
+import { useWindowSize } from '../../hooks/useWindowSize';
 
 interface InputProps extends ChakraInputProps {
   label?: string
@@ -31,7 +33,7 @@ const Input = forwardRef<InputProps, 'input'>(
     },
     ref
   ) => {
-
+    const { width } = useWindowSize()
     return (
       <FormControl id={name} isInvalid={!!error} isRequired={isRequired} display="flex" flexDirection="column">
         <FormLabel
@@ -44,8 +46,12 @@ const Input = forwardRef<InputProps, 'input'>(
           {label}
         </FormLabel>
         <InputGroup>
-          <InputLeftElement hidden={!actionDuration} mt={1.5}>
-            <TiTime fontSize={28} />
+          <InputLeftElement mt={"1%"}>
+            {
+              type === 'phone' ?
+                (<FaWhatsapp fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
+                : (<AiOutlineMail fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
+            }
           </InputLeftElement>
           <ChakraInput
             name={name}
@@ -53,10 +59,10 @@ const Input = forwardRef<InputProps, 'input'>(
             background="primaryColor.500"
             border="1px solid text.secondary"
             ref={ref}
-            pl={actionDuration ? 10 : 6}
+            paddingLeft="2.5rem"
             color="text.tertiary"
             boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
-            fontSize={{ base: "1rem", md: "1.25rem" }}
+            fontSize={{ base: "0.75rem", md: "1rem", lg:"1.125rem" }}
             letterSpacing="0.2rem"
             {...rest}
           />

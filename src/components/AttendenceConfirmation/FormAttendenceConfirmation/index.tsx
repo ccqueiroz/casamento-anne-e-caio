@@ -75,8 +75,8 @@ const FormAttendenceConfirmation: React.FC = () => {
                             >
                                 {() => (
                                     <Input
-                                        placeholder={"Informe seu número de Whatsapp"}
-
+                                        placeholder={"Informe seu Whatsapp"}
+                                        type="phone"
                                         label={"Telefone (Whatsapp)"}
                                         error={errors.phone}
                                         isRequired

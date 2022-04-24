@@ -8,7 +8,7 @@ export default class MyDocument extends Document{
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                     <link rel="shortcut icon" href="images/casal.png" type="images/png" />
                     <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC8TEKvLAQ0hdWi3E84WrxjqN57yBVFT8"
+                        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`}
                         defer
                     >
                     </script>

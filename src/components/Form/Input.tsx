@@ -46,7 +46,7 @@ const Input = forwardRef<InputProps, 'input'>(
           {label}
         </FormLabel>
         <InputGroup>
-          <InputLeftElement mt={"1%"}>
+          <InputLeftElement mt={"1%"} ml="5px">
             {
               type === 'phone' ?
                 (<FaWhatsapp fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
@@ -59,7 +59,7 @@ const Input = forwardRef<InputProps, 'input'>(
             background="primaryColor.500"
             border="1px solid text.secondary"
             ref={ref}
-            paddingLeft="2.5rem"
+            paddingLeft="2.9rem"
             color="text.tertiary"
             boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
             fontSize={{ base: "0.75rem", md: "1rem", lg:"1.125rem" }}

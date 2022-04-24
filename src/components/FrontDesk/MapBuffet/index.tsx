@@ -13,8 +13,7 @@ const MapBuffet: React.FC = () => {
                 zoom: 16,
                 center: coordAtlantis,
                 disableDefaultUI: true,
-                zoomControl: false,
-                gestureHandling: null
+                zoomControl: false
             }
         );
         const marker = new google.maps.Marker({ map, position: coordAtlantis, title: 'Atlantis Buffet' });
@@ -22,11 +21,7 @@ const MapBuffet: React.FC = () => {
         const centerControlDiv = document.createElement("div");
         CenterControl(centerControlDiv);
         marker.addListener("click", () => {
-            infowindow.open({
-                anchor: marker,
-                map,
-                shouldFocus: false,
-            });
+            infowindow.open(map, marker);
             centerControlDiv.style.display = "none"
         })
         google.maps.event.addListener(map, 'click', function () {

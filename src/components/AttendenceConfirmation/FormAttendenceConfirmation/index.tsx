@@ -46,10 +46,7 @@ const FormAttendenceConfirmation: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const submit: SubmitHandler<UserModel> = useCallback((data) => {
-        console.log('data => ', data)
-        setTimeout(() => console.log(''), 2000)
-    }, []);
+    const submit: SubmitHandler<UserModel> = useCallback((data) => {}, []);
 
     return (
         <Box

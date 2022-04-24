@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { Box } from '@chakra-ui/react';
 import { alertDialogWithAdress } from './alertDialogWithAdress'
 import {CenterControl} from './CenterControl'
+import { google } from "google-maps";
+
+declare var google: google;
 
 const MapBuffet: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null);

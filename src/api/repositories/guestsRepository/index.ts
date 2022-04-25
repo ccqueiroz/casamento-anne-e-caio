@@ -1,5 +1,5 @@
 import { query as q } from 'faunadb';
-import { fauna } from '../../../services/fauna';
+import { fauna } from '../../../lib/clients/fauna';
 import { GuestsFaunaDB, UserModel } from '../../../data/model/User';
 
 class GuestsRepository {

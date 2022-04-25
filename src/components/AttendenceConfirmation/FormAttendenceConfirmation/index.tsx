@@ -9,8 +9,9 @@ import {
     Radio,
     RadioGroup,
     Text,
+    useDisclosure
 } from '@chakra-ui/react';
-import React, { ChangeEvent, useCallback } from 'react';
+import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import { Input } from '../../Form/Input';
 import InputMask from 'react-input-mask';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
@@ -18,16 +19,22 @@ import { isPhone } from 'brazilian-values';
 import { UserModel } from '../../../data/model/User';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import InputUpload from '../../Form/InputUpload';
+import { VaccineCard } from '../../Overlay/VaccineCard';
+import { FileWithPreview } from '../../../data/model/Files';
+import toast from 'react-hot-toast';
 
 const FormAttendenceConfirmation: React.FC = () => {
-  const signUpFormSchema = yup.object().shape({
-    phone: yup
-          .string()
-          .test('phone', 'Informe um número de telefone válido', (phone: string | undefined) => isPhone(phone || ''))
-        .required("Por favor, informe seu telefone (whatsapp)"),
-    email: yup.string().email("E-mail inválido. Por favor, informe um e-mail válido").required("Por favor, informe seu e-mail"),
-    presenceAtTheEvent: yup.string().required('Por favor, informe se você poderá comparecer ao evento.')
-  })
+    const { onOpen: onOpenVaccineCard, ...propsModalVaccineCard } = useDisclosure();
+    const [filesData, setFilesData] = useState<Array<FileWithPreview>>([]);
+    const signUpFormSchema = yup.object().shape({
+        phone: yup
+            .string()
+            .test('phone', 'Informe um número de telefone válido', (phone: string | undefined) => isPhone(phone || ''))
+            .required("Por favor, informe seu telefone (whatsapp)"),
+        email: yup.string().email("E-mail inválido. Por favor, informe um e-mail válido").required("Por favor, informe seu e-mail"),
+        presenceAtTheEvent: yup.string().required('Por favor, informe se você poderá comparecer ao evento.'),
+    })
     const {
         register,
         handleSubmit,
@@ -46,7 +53,22 @@ const FormAttendenceConfirmation: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const submit: SubmitHandler<UserModel> = useCallback((data) => {}, []);
+    const deleteAttachment = useCallback((fileName: string) => {
+        const find = filesData
+            ?.map((file: FileWithPreview) => file.name)
+            ?.indexOf(fileName)
+        if (find >= 0) {
+            filesData.splice(find, 1)
+            setFilesData([...filesData])
+        }
+    }, [filesData]);
+
+    const submit: SubmitHandler<UserModel> = useCallback((data) => {
+        if (data?.presenceAtTheEvent === 'Y' && filesData.length === 0) {
+            toast.error('Por favor, faça o upload do seu cartão de vacina.');
+            return;
+        }
+    }, [filesData]);
 
     return (
         <Box
@@ -74,7 +96,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                     {...register('email')}
                     />
                 </GridItem>
-                <GridItem mb="2rem">
+                <GridItem mb="2.5rem">
                     <Controller
                         control={control}
                         name="phone"
@@ -97,65 +119,77 @@ const FormAttendenceConfirmation: React.FC = () => {
                             </InputMask>
                         )}
                     />
-                    </GridItem>
-                    <GridItem mb="2rem">
-                        <FormControl
-                            isInvalid={!!errors.presenceAtTheEvent}
-                            isRequired
+                </GridItem>
+                <GridItem mb="1rem">
+                    <FormControl
+                        isInvalid={!!errors.presenceAtTheEvent}
+                        isRequired
+                    >
+                        <FormLabel mb="1rem">
+                            <Text
+                                as="label"
+                                fontWeight="bold"
+                                letterSpacing="0.2rem"
+                                color="text.tertiary"
+                                fontSize={{base:"1rem", md:"1.25rem"}}
+                            >
+                                Você irá comparecer ao evento?
+                            </Text>
+                        </FormLabel>
+                        <RadioGroup
+                            value={getValues('presenceAtTheEvent')}
+                            onChange={handleOnChangeRadioGroup}
                         >
-                            <FormLabel mb="1rem">
+                            <Radio
+                                value="Y"
+                                pb={3}
+                                {...register('presenceAtTheEvent')}
+
+                            >
                                 <Text
-                                    as="label"
-                                    fontWeight="bold"
+                                    colorScheme="text.secondary"
                                     letterSpacing="0.2rem"
                                     color="text.tertiary"
                                     fontSize={{base:"1rem", md:"1.25rem"}}
                                 >
-                                    Você irá comparecer ao evento?
+                                    Sim
                                 </Text>
-                            </FormLabel>
-                            <RadioGroup
-                                value={getValues('presenceAtTheEvent')}
-                                onChange={handleOnChangeRadioGroup}
+                            </Radio>
+                            <Radio
+                                value="N"
+                                ml="5rem"
+                                pb={3}
+                                {...register('presenceAtTheEvent')}
                             >
-                                <Radio
-                                    value="Y"
-                                    pb={3}
-                                    {...register('presenceAtTheEvent')}
-
+                                <Text
+                                    colorScheme="text.secondary"
+                                    letterSpacing="0.2rem"
+                                    color="text.tertiary"
+                                    fontSize={{base:"1rem", md:"1.25rem"}}
                                 >
-                                    <Text
-                                        colorScheme="text.secondary"
-                                        letterSpacing="0.2rem"
-                                        color="text.tertiary"
-                                        fontSize={{base:"1rem", md:"1.25rem"}}
-                                    >
-                                        Sim
-                                    </Text>
-                                </Radio>
-                                <Radio
-                                    value="N"
-                                    ml="5rem"
-                                    pb={3}
-                                    {...register('presenceAtTheEvent')}
-                                >
-                                    <Text
-                                        colorScheme="text.secondary"
-                                        letterSpacing="0.2rem"
-                                        color="text.tertiary"
-                                        fontSize={{base:"1rem", md:"1.25rem"}}
-                                    >
-                                        Não
-                                    </Text>
-                                </Radio>
-                            </RadioGroup>
-                            {!!errors.presenceAtTheEvent && (
-                                <FormErrorMessage>
-                                    {errors.presenceAtTheEvent?.message}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
+                                    Não
+                                </Text>
+                            </Radio>
+                        </RadioGroup>
+                        {!!errors.presenceAtTheEvent && (
+                            <FormErrorMessage>
+                                {errors.presenceAtTheEvent?.message}
+                            </FormErrorMessage>
+                        )}
+                    </FormControl>
                 </GridItem>
+                {
+                    getValues('presenceAtTheEvent') === 'Y' && (
+                        <GridItem mb="2.5rem">
+                            <InputUpload
+                                openModal={onOpenVaccineCard}
+                                filesData={filesData}
+                                deleteAttachment={deleteAttachment}
+                            />
+
+                        </GridItem>
+                    )
+                }
                 <Flex
                     width="100%"
                     justifyContent="center"
@@ -182,6 +216,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                     </Button>
                 </Flex>
             </FormControl>
+            <VaccineCard setFiles={setFilesData} {...propsModalVaccineCard}/>
         </Box>
     );
 }

@@ -26,7 +26,7 @@ const FooterSection: React.FC = () => {
                     xl:"0 4rem",
                 }}
                 width="100%"
-                maxWidth="1300px"
+                maxWidth="1400px"
                 margin="0 auto"
                 display={['flex', 'flex', 'grid']}
                 flexDir={['column', 'column', 'initial']}
@@ -35,7 +35,7 @@ const FooterSection: React.FC = () => {
             >
                 <GridItem colSpan={{ base: 12, lg: 4 }} >
                     <TextContentSection wordBreak="break-word" textAlign={{base: 'center', lg:'left'}} padding="0 0.5rem">
-                        O que Deus uniu o homem não separa - Mateus 19:6
+                        {'"Pois onde estiver o amor, alí estará também o nosso coração." Lc 12:34'}
                     </TextContentSection>
                 </GridItem>
                 <GridItem colSpan={{ base: 12, lg: 5 }}>

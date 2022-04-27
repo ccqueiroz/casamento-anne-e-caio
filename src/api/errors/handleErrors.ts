@@ -6,12 +6,13 @@ interface IResponseError {
     statusCode: number;
 }
 
-const handleErrors = (err: AppError): IResponseError => {
+const handleErrors = (err: AppError | unknown): IResponseError => {
     if(err instanceof AppError){
-        const error = {
+        const error: AppError = {
             message: err?.message,
-            statusCode: err?.statusCode
-        } as AppError;
+            statusCode: err?.statusCode,
+            name: err?.name
+        };
         return error;
     }
     return {

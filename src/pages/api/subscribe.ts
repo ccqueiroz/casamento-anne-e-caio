@@ -21,8 +21,8 @@ controllerSubscrible
             const guestResponse = await guestService.execute();
             return response.status(guestResponse.code).json(guestResponse);
         } catch (error) {
-            const err = handleErrors(error as unknown as AppError);
-            return response.status(error?.statusCode ?? 500).json({ data: err.description ?? err?.message });
+            const err = handleErrors(error);
+            return response.status(err?.statusCode ?? 500).json({ data: err.description ?? err?.message });
         }
     } else {
         response.setHeader('allow', 'PUT');

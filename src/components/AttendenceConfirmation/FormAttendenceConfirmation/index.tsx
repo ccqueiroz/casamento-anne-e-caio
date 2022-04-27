@@ -24,9 +24,14 @@ import { VaccineCard } from '../../Overlay/VaccineCard';
 import { FileWithPreview } from '../../../data/model/Files';
 import toast from 'react-hot-toast';
 import { actionService } from '../../../services/subscribe';
+import { ModalGuestResponse } from '../../Overlay/GuestResponseModal';
+import { GuestResponseModal } from '../../../data/model/UserResponseModal';
+import { HandleMessageResponse } from '../../../data/model/Api/HandleMessageModel';
 
 const FormAttendenceConfirmation: React.FC = () => {
     const { onOpen: onOpenVaccineCard, ...propsModalVaccineCard } = useDisclosure();
+    const { onOpen: onOpenGuestResponse, ...propsModalGuestResponse } = useDisclosure();
+    const [dataGuestResponse, setDataGuestResponse] = useState<GuestResponseModal>({});
     const [filesData, setFilesData] = useState<Array<FileWithPreview>>([]);
     const [loadingRequest, setLoadingRequest] = useState<boolean>(false);
     const signUpFormSchema = yup.object().shape({
@@ -55,6 +60,16 @@ const FormAttendenceConfirmation: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleOnOpenModalUserResponse = useCallback(({statusCode, message, guest}: GuestResponseModal) => {
+        setDataGuestResponse({
+            statusCode,
+            message,
+            guest,
+        })
+        onOpenGuestResponse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const deleteAttachment = useCallback((fileName: string) => {
         const find = filesData
             ?.map((file: FileWithPreview) => file.name)
@@ -78,11 +93,22 @@ const FormAttendenceConfirmation: React.FC = () => {
         dataPost.append('presenceAtTheEvent', data?.presenceAtTheEvent)
         dataPost.append('vaccineFile', filesData[0])
 
-        await actionService.subscribe(dataPost).then((res: GuestsModel) => {
-            console.log('res => ', res)
+        await actionService.subscribe(dataPost).then((res: HandleMessageResponse) => {
+            if (res?.code === 208) {
+                handleOnOpenModalUserResponse({
+                    guest: res.guest,
+                    statusCode: res.code
+                });
+            }
         }).catch((err) => {
-            console.log('err => ', err)
+            if (err?.response.status === 404) {
+                handleOnOpenModalUserResponse({
+                    statusCode: err?.response?.status,
+                    message: err?.response?.data
+                });    
+            }
         }).finally(() => setLoadingRequest(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filesData]);
 
     return (
@@ -230,6 +256,12 @@ const FormAttendenceConfirmation: React.FC = () => {
                     </Button>
                 </Flex>
             </FormControl>
+            <ModalGuestResponse
+                guest={dataGuestResponse?.guest}
+                statusCode={dataGuestResponse?.statusCode}
+                message={dataGuestResponse?.message}
+                {...propsModalGuestResponse}
+            />
             <VaccineCard setFiles={setFilesData} {...propsModalVaccineCard}/>
         </Box>
     );

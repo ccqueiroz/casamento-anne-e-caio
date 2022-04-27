@@ -30,7 +30,7 @@ import { HandleMessageResponse } from '../../../data/model/Api/HandleMessageMode
 
 const FormAttendenceConfirmation: React.FC = () => {
     const { onOpen: onOpenVaccineCard, ...propsModalVaccineCard } = useDisclosure();
-    const { onOpen: onOpenGuestResponse, ...propsModalGuestResponse } = useDisclosure();
+    const { onOpen: onOpenGuestResponse, onClose: onCloseGuestResponse, ...propsModalGuestResponse } = useDisclosure();
     const [dataGuestResponse, setDataGuestResponse] = useState<GuestResponseModal>({});
     const [filesData, setFilesData] = useState<Array<FileWithPreview>>([]);
     const [loadingRequest, setLoadingRequest] = useState<boolean>(false);
@@ -48,6 +48,7 @@ const FormAttendenceConfirmation: React.FC = () => {
         setValue,
         getValues,
         control,
+        reset,
         clearErrors,
         formState: { errors },
     } = useForm<GuestsModel>({
@@ -55,18 +56,28 @@ const FormAttendenceConfirmation: React.FC = () => {
     });
 
     const handleOnChangeRadioGroup = useCallback((event: string): void => {
-        setValue('presenceAtTheEvent', event)
-        clearErrors(['presenceAtTheEvent'])
+        setValue('presenceAtTheEvent', event);
+        clearErrors(['presenceAtTheEvent']);
+        setFilesData([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleOnOpenModalUserResponse = useCallback(({statusCode, message, guest}: GuestResponseModal) => {
+    const handleOnOpenModalGuestResponse = useCallback(({statusCode, message, guest}: GuestResponseModal) => {
         setDataGuestResponse({
             statusCode,
             message,
             guest,
         })
         onOpenGuestResponse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleCloseModalGuestResponse = useCallback(() => {
+        setDataGuestResponse({});
+        setFilesData([]);
+        reset();
+        setValue('phone', '')
+        onCloseGuestResponse();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -95,14 +106,14 @@ const FormAttendenceConfirmation: React.FC = () => {
 
         await actionService.subscribe(dataPost).then((res: HandleMessageResponse) => {
             if (res?.code === 208) {
-                handleOnOpenModalUserResponse({
+                handleOnOpenModalGuestResponse({
                     guest: res.guest,
                     statusCode: res.code
                 });
             }
         }).catch((err) => {
             if (err?.response.status === 404) {
-                handleOnOpenModalUserResponse({
+                handleOnOpenModalGuestResponse({
                     statusCode: err?.response?.status,
                     message: err?.response?.data
                 });    
@@ -142,6 +153,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                         name="phone"
                         render={({ field: { onChange, value } }) => (
                             <InputMask
+                                name="phone"
                                 mask="(99) 9 9999-9999"
                                 onChange={(event: ChangeEvent<HTMLInputElement>) => onChange(event.target.value)}
                                 value={value}
@@ -256,6 +268,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                 </Flex>
             </FormControl>
             <ModalGuestResponse
+                onClose={handleCloseModalGuestResponse}
                 guest={dataGuestResponse?.guest}
                 statusCode={dataGuestResponse?.statusCode}
                 message={dataGuestResponse?.message}

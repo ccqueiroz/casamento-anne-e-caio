@@ -27,11 +27,8 @@ class SubscribeService {
             if (!guest.data) {
                 throw new AppError("Convidado não localizado", 404);
             };
-            if (guest?.data?.presenceAtTheEvent && guest.data?.presenceAtTheEvent === 'Y' && this.guest.presenceAtTheEvent === 'Y') {
+            if (guest?.data?.presenceAtTheEvent && guest.data?.presenceAtTheEvent === this.guest.presenceAtTheEvent) {
                 return this.handleMessage("Convidado já confirmou sua participação.", guest.data, 208);
-            }
-            if (guest?.data?.presenceAtTheEvent && guest.data?.presenceAtTheEvent === 'N' && this.guest.presenceAtTheEvent === 'N') {
-                return this.handleMessage("Convidado já declinou de sua participação.", guest.data, 208);
             }
             if (this.guest.presenceAtTheEvent === 'N') {
                 const hasFiles = guest?.data?.urlVaccineCard;

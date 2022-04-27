@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from 'react';
 
 import {
   Modal as ChakraModal,
@@ -9,7 +9,7 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps as ChakraModalProps,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 type ModalProps = ChakraModalProps & {
   header?: ReactElement
@@ -33,7 +33,7 @@ const Modal: React.FC<ModalProps> = ({ header, children, footer, ...rest }) => {
         {footer && <ModalFooter>{footer}</ModalFooter>}
       </ModalContent>
     </ChakraModal>
-  )
+  );
 }
 
-export { Modal }
+export { Modal };

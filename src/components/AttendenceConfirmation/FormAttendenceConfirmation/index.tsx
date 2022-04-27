@@ -48,7 +48,6 @@ const FormAttendenceConfirmation: React.FC = () => {
         setValue,
         getValues,
         control,
-        reset,
         clearErrors,
         formState: { errors },
     } = useForm<GuestsModel>({

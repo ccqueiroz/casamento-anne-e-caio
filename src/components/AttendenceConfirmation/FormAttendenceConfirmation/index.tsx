@@ -39,7 +39,7 @@ const FormAttendenceConfirmation: React.FC = () => {
             .string()
             .test('phone', 'Informe um número de telefone válido', (phone: string | undefined) => isPhone(phone || ''))
             .required("Por favor, informe seu telefone (whatsapp)"),
-        email: yup.string().email("E-mail inválido. Por favor, informe um e-mail válido").required("Por favor, informe seu e-mail"),
+        email: yup.string().email("E-mail inválido. Por favor, informe um e-mail válido"),
         presenceAtTheEvent: yup.string().required('Por favor, informe se você poderá comparecer ao evento.'),
     })
     const {
@@ -130,7 +130,6 @@ const FormAttendenceConfirmation: React.FC = () => {
                     id="email"
                     label={"E-mail"}
                     type="e-mail"
-                    isRequired={true}
                     placeholder="Digite seu e-mail"
                     error={errors.email}
                     height="3rem"

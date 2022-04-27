@@ -39,8 +39,9 @@ class SubscribeService {
             };
             return this.handleMessage("Atualização realizada com sucesso.", updateGuest?.data, 200);
         } catch (error) {
-            const err: AppError = error;
-            throw new AppError(err?.message , err?.statusCode);
+            // const err: AppError = error;
+            // throw new AppError(err?.message , err?.statusCode);
+            throw new AppError("Falha ao atualizar informações do convidado.", 500);
         }
     }
 }

@@ -11,7 +11,7 @@ import {
     Text,
     useDisclosure
 } from '@chakra-ui/react';
-import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Input } from '../../Form/Input';
 import InputMask from 'react-input-mask';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
@@ -23,10 +23,12 @@ import InputUpload from '../../Form/InputUpload';
 import { VaccineCard } from '../../Overlay/VaccineCard';
 import { FileWithPreview } from '../../../data/model/Files';
 import toast from 'react-hot-toast';
+import { actionService } from '../../../services/subscribe';
 
 const FormAttendenceConfirmation: React.FC = () => {
     const { onOpen: onOpenVaccineCard, ...propsModalVaccineCard } = useDisclosure();
     const [filesData, setFilesData] = useState<Array<FileWithPreview>>([]);
+    const [loadingRequest, setLoadingRequest] = useState<boolean>(false);
     const signUpFormSchema = yup.object().shape({
         phone: yup
             .string()
@@ -42,7 +44,7 @@ const FormAttendenceConfirmation: React.FC = () => {
         getValues,
         control,
         clearErrors,
-        formState: { errors, isSubmitting },
+        formState: { errors },
     } = useForm<UserModel>({
         resolver: yupResolver<yup.AnyObjectSchema>(signUpFormSchema),
     });
@@ -63,11 +65,24 @@ const FormAttendenceConfirmation: React.FC = () => {
         }
     }, [filesData]);
 
-    const submit: SubmitHandler<UserModel> = useCallback((data) => {
+    const submit: SubmitHandler<UserModel> = useCallback(async (data) => {
         if (data?.presenceAtTheEvent === 'Y' && filesData.length === 0) {
             toast.error('Por favor, faça o upload do seu cartão de vacina.');
             return;
         }
+        setLoadingRequest(true);
+
+        const dataPost = new FormData()
+        dataPost.append('email', data?.email)
+        dataPost.append('phone', data?.phone)
+        dataPost.append('presenceAtTheEvent', data?.presenceAtTheEvent)
+        dataPost.append('vaccineFile', filesData[0])
+
+        await actionService.subscribe(dataPost).then((res: UserModel) => {
+            console.log('res => ', res)
+        }).catch((err) => {
+            console.log('err => ', err)
+        }).finally(() => setLoadingRequest(false));
     }, [filesData]);
 
     return (
@@ -186,7 +201,6 @@ const FormAttendenceConfirmation: React.FC = () => {
                                 filesData={filesData}
                                 deleteAttachment={deleteAttachment}
                             />
-
                         </GridItem>
                     )
                 }
@@ -207,7 +221,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                         background="linear-gradient(45deg, #aadae9, #d6eef5)"
                         transition="background 300ms easy-in-out"
                         boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
-                        isLoading={isSubmitting}
+                        isLoading={loadingRequest}
                         _hover={{
                             backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
                         }}

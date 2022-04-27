@@ -39,7 +39,7 @@ class SubscribeService {
             };
             return this.handleMessage("Atualização realizada com sucesso.", updateGuest?.data, 200);
         } catch (error) {
-            const err: AppError = error
+            const err: AppError = error as unknown as AppError
             throw new AppError(err?.message , err?.statusCode);
         }
     }

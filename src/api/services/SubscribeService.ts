@@ -5,7 +5,7 @@ import UploadFileService from './UploadFileService';
 import { Files } from "formidable";
 import { HandleMessageResponse } from '../../data/model/Api/HandleMessageModel';
 import { handleErrors } from '../errors/handleErrors';
-
+import { DeleteFileService } from './DeleteFileService';
 class SubscribeService {
     constructor(
         private guestsRepository: GuestsRepository,
@@ -27,8 +27,20 @@ class SubscribeService {
             if (!guest.data) {
                 throw new AppError("Convidado não localizado", 404);
             };
-            if (guest?.data?.presenceAtTheEvent) {
+            if (guest?.data?.presenceAtTheEvent && guest.data?.presenceAtTheEvent === 'Y' && this.guest.presenceAtTheEvent === 'Y') {
                 return this.handleMessage("Convidado já confirmou sua participação.", guest.data, 208);
+            }
+            if (guest?.data?.presenceAtTheEvent && guest.data?.presenceAtTheEvent === 'N' && this.guest.presenceAtTheEvent === 'N') {
+                return this.handleMessage("Convidado já declinou de sua participação.", guest.data, 208);
+            }
+            if (this.guest.presenceAtTheEvent === 'N') {
+                const hasFiles = guest?.data?.urlVaccineCard;
+                if (hasFiles) {
+                    await new DeleteFileService(hasFiles?.split('s3.amazonaws.com/')[1]).execute();
+                }
+                this.guest.urlVaccineCard = '';
+                const updateGuest = await this.guestsRepository.queryUpdateGuest(this.guest, guest.ref.id);
+                return this.handleMessage("Atualização realizada com sucesso.", updateGuest?.data, 200);
             }
             const fileName = Object.keys(this.file).toString();
             const uploadFileService = new UploadFileService(this.file, fileName);

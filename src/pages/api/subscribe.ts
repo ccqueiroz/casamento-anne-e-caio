@@ -4,6 +4,7 @@ import { GuestsRepository } from '../../api/repositories/guestsRepository';
 import { SubscribeService } from '../../api/services/SubscribeService';
 import nextConnect from 'next-connect';
 import parseMultiPartyForm from '../../api/middlewares/multipartyFormMiddleware';
+import AppError from '../../api/errors/typeErrors/AppError';
 
 const controllerSubscrible = nextConnect();
 
@@ -20,8 +21,8 @@ controllerSubscrible
             const guestResponse = await guestService.execute();
             return response.status(guestResponse.code).json(guestResponse);
         } catch (error) {
-            const err = handleErrors(error);
-            return response.status(error.statusCode ?? 500).json({ data: err.description ?? err.message });
+            const err = handleErrors(error as unknown as AppError);
+            return response.status(error?.statusCode ?? 500).json({ data: err.description ?? err?.message });
         }
     } else {
         response.setHeader('allow', 'PUT');

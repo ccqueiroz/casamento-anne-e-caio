@@ -1,4 +1,4 @@
-import { UserModel } from '../../data/model/User';
+import { GuestsModel } from '../../data/model/Guests';
 import AppError from '../errors/typeErrors/AppError';
 import { GuestsRepository } from '../repositories/guestsRepository';
 import UploadFileService from './UploadFileService';
@@ -8,11 +8,11 @@ import { HandleMessageResponse } from '../../data/model/Api/HandleMessageModel';
 class SubscribeService {
     constructor(
         private guestsRepository: GuestsRepository,
-        private guest: UserModel,
+        private guest: GuestsModel,
         private file: Files
     ) { }
     
-    private handleMessage(message: string, guest: UserModel, code: number): HandleMessageResponse {
+    private handleMessage(message: string, guest: GuestsModel, code: number): HandleMessageResponse {
         return {
             message,
             guest,

@@ -16,7 +16,7 @@ import { Input } from '../../Form/Input';
 import InputMask from 'react-input-mask';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { isPhone } from 'brazilian-values';
-import { UserModel } from '../../../data/model/User';
+import { GuestsModel } from '../../../data/model/Guests';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import InputUpload from '../../Form/InputUpload';
@@ -45,7 +45,7 @@ const FormAttendenceConfirmation: React.FC = () => {
         control,
         clearErrors,
         formState: { errors },
-    } = useForm<UserModel>({
+    } = useForm<GuestsModel>({
         resolver: yupResolver<yup.AnyObjectSchema>(signUpFormSchema),
     });
 
@@ -65,7 +65,7 @@ const FormAttendenceConfirmation: React.FC = () => {
         }
     }, [filesData]);
 
-    const submit: SubmitHandler<UserModel> = useCallback(async (data) => {
+    const submit: SubmitHandler<GuestsModel> = useCallback(async (data) => {
         if (data?.presenceAtTheEvent === 'Y' && filesData.length === 0) {
             toast.error('Por favor, faça o upload do seu cartão de vacina.');
             return;
@@ -78,7 +78,7 @@ const FormAttendenceConfirmation: React.FC = () => {
         dataPost.append('presenceAtTheEvent', data?.presenceAtTheEvent)
         dataPost.append('vaccineFile', filesData[0])
 
-        await actionService.subscribe(dataPost).then((res: UserModel) => {
+        await actionService.subscribe(dataPost).then((res: GuestsModel) => {
             console.log('res => ', res)
         }).catch((err) => {
             console.log('err => ', err)

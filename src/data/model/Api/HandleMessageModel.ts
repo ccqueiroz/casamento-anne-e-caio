@@ -1,7 +1,7 @@
-import { UserModel } from "../User";
+import { GuestsModel } from "../Guests";
 
 export type HandleMessageResponse = {
     message: string,
-    guest: UserModel,
+    guest: GuestsModel,
     code: number
 }

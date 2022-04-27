@@ -75,8 +75,9 @@ const FormAttendenceConfirmation: React.FC = () => {
     const handleCloseModalGuestResponse = useCallback(() => {
         setDataGuestResponse({});
         setFilesData([]);
-        reset();
-        setValue('phone', '')
+        setValue('email', '');
+        setValue('phone', '');
+        setValue('presenceAtTheEvent', '');
         onCloseGuestResponse();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -110,7 +111,9 @@ const FormAttendenceConfirmation: React.FC = () => {
                     guest: res.guest,
                     statusCode: res.code
                 });
+                return
             }
+            handleCloseModalGuestResponse();
         }).catch((err) => {
             if (err?.response.status === 404) {
                 handleOnOpenModalGuestResponse({

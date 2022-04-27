@@ -17,6 +17,7 @@ export interface ModalFileProps extends Omit<ChakraModalProps, 'children'> {
     message?: string
     guest?: GuestsModel
     widthScreen?: number | undefined
+    onClose: () => void
 }
 
 const ModalGuestResponse: React.FC<Omit<ModalFileProps, 'widthScreen'>> = ({

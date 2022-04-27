@@ -1,6 +1,6 @@
 import { query as q } from 'faunadb';
 import { fauna } from '../../../lib/clients/fauna';
-import { GuestsFaunaDB, UserModel } from '../../../data/model/User';
+import { GuestsFaunaDB, GuestsModel } from '../../../data/model/Guests';
 
 class GuestsRepository {
     private readonly colletion = 'guests';
@@ -17,7 +17,7 @@ class GuestsRepository {
     }
 
     //create
-    public async queryCreateGuest(dataBody: UserModel): Promise<GuestsFaunaDB> {
+    public async queryCreateGuest(dataBody: GuestsModel): Promise<GuestsFaunaDB> {
         const guest = await fauna.query<GuestsFaunaDB>(
             q.Create(q.Collection(this.colletion), {data: {...dataBody}})
         ).then((res: GuestsFaunaDB ) => res).catch(err => err);
@@ -37,7 +37,7 @@ class GuestsRepository {
     }
 
     //update
-    public async queryUpdateGuest(dataBody: UserModel, guest_ref_id: string): Promise<GuestsFaunaDB> {
+    public async queryUpdateGuest(dataBody: GuestsModel, guest_ref_id: string): Promise<GuestsFaunaDB> {
         const guest = await fauna.query<GuestsFaunaDB>(
             q.Update(
                 q.Ref(q.Collection(this.colletion), guest_ref_id),

@@ -2,16 +2,17 @@ import AppError from './typeErrors/AppError';
 
 interface IResponseError {
     description?: string;
-    message?: string;
+    message: string;
     statusCode: number;
 }
 
-const handleErrors = (err: AppError): IResponseError => {
+const handleErrors = (err: AppError | unknown): AppError | IResponseError => {
     if(err instanceof AppError){
-        const error = {
+        const error: AppError = {
             message: err?.message,
-            statusCode: err?.statusCode
-        } as AppError;
+            statusCode: err?.statusCode,
+            name: err?.name
+        };
         return error;
     }
     return {

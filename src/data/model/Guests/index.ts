@@ -1,12 +1,13 @@
 import { FileWithPreview } from "../Files";
 
-export interface UserModel {
+export interface GuestsModel {
     id?: string,
     name?: string,
-    email?: string,
-    phone?: string,
-    presenceAtTheEvent?: string
+    email: string,
+    phone: string,
+    presenceAtTheEvent: string
     vaccineCard?: FileWithPreview
+    urlVaccineCard?: string
 }
 
 export type GuestsFaunaDB = {
@@ -14,5 +15,5 @@ export type GuestsFaunaDB = {
         id: string,
     };
     ts: number | string;
-    data: UserModel
+    data: GuestsModel
 }

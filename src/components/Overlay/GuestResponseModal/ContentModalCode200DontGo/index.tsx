@@ -1,10 +1,10 @@
 import { Box, Divider } from '@chakra-ui/react';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ModalFileProps } from '..';
 import { TextComponent } from '../../../TextComponent';
 import { ContactsWithIcon } from '../ContactsWithIcon';
 
-const ContentModalCode208: React.FC<Pick<ModalFileProps, 'widthScreen'  | 'guest'>> = ({ widthScreen, guest }) => {
+const ContentModalCodeDontGo: React.FC<Pick<ModalFileProps, 'widthScreen'>> = ({ widthScreen }) => {
     const iconsProps = {
         width: {
             base: "1rem",
@@ -20,23 +20,11 @@ const ContentModalCode208: React.FC<Pick<ModalFileProps, 'widthScreen'  | 'guest
             md: "15px"
         }
     }
-    const renderPresenceText = useMemo(() => {
-        if (guest && guest.presenceAtTheEvent === 'Y') {
-            return {
-                mainText: 'Sua presença já foi confirmada em nossa lista casamento.',
-                text: 'Aguardamos você lá!'
-            };
-        } else {
-            return {
-                mainText: 'Sua resposta de não poder comparecer ao nosso casamento já está registrada em nossa lista.',
-                text: 'Agradecemos o preenchimento do formulário.'
-            }
-        }
-    }, [guest]);
+    
     return (
         <Box mb="0.5rem">
             <TextComponent
-                text={renderPresenceText.mainText}
+                text={`É uma pena que você não possa estar conosco durante este dia tão especial.`}
                 fontSize={{
                     base: "md",
                     md: "lg"
@@ -46,10 +34,9 @@ const ContentModalCode208: React.FC<Pick<ModalFileProps, 'widthScreen'  | 'guest
                     md: "0.2rem"
                 }}
                 textIndent={widthScreen && widthScreen < 500 ? 25 : 50}
-
             />
             <TextComponent
-                text={renderPresenceText.text}
+                text="Agradecemos o preenchimento do formulário."
                 fontSize={{
                     base: "md",
                     md: "lg"
@@ -58,9 +45,8 @@ const ContentModalCode208: React.FC<Pick<ModalFileProps, 'widthScreen'  | 'guest
                     base: "0.03rem",
                     md: "0.2rem"
                 }}
-                textIndent={widthScreen && widthScreen < 500 ? 25 : 50}
             />
-            <Divider bg="text.secondary" height="0.2px" margin="0.5rem"/>
+            <Divider bg="text.secondary" height="0.2px" margin="0.8rem"/>
             <Box width="100%">
                 <ContactsWithIcon
                     name="85 9 8894-1319 - Anne Queiroz"
@@ -83,4 +69,4 @@ const ContentModalCode208: React.FC<Pick<ModalFileProps, 'widthScreen'  | 'guest
     );
 };
 
-export { ContentModalCode208 }
+export { ContentModalCodeDontGo }

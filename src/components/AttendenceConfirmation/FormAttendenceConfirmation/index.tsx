@@ -105,14 +105,10 @@ const FormAttendenceConfirmation: React.FC = () => {
         dataPost.append('vaccineFile', filesData[0])
 
         await actionService.subscribe(dataPost).then((res: HandleMessageResponse) => {
-            if (res?.code === 208) {
-                handleOnOpenModalGuestResponse({
-                    guest: res.guest,
-                    statusCode: res.code
-                });
-                return
-            }
-            handleCloseModalGuestResponse();
+            handleOnOpenModalGuestResponse({
+                guest: res.guest,
+                statusCode: res.code
+            });
         }).catch((err) => {
             if (err?.response.status === 404) {
                 handleOnOpenModalGuestResponse({

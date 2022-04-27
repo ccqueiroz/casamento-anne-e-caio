@@ -14,7 +14,6 @@ controllerSubscrible
         try {
             const { email, presenceAtTheEvent, phone } = request.body;
             const { files } = request;
-
             const guestRepository = new GuestsRepository();
             const guestService = new SubscribeService(guestRepository, { email, presenceAtTheEvent, phone }, files);
             const guestResponse = await guestService.execute();

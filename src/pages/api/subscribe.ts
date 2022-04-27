@@ -22,7 +22,7 @@ controllerSubscrible
             return response.status(guestResponse.code).json(guestResponse);
         } catch (error) {
             const err = handleErrors(error);
-            return response.status(err?.statusCode ?? 500).json({ data: err.description ?? err?.message });
+            return response.status(err.statusCode).json({ data: err.message });
         }
     } else {
         response.setHeader('allow', 'PUT');

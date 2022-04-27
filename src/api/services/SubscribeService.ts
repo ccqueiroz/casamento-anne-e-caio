@@ -4,6 +4,7 @@ import { GuestsRepository } from '../repositories/guestsRepository';
 import UploadFileService from './UploadFileService';
 import { Files } from "formidable";
 import { HandleMessageResponse } from '../../data/model/Api/HandleMessageModel';
+import { handleErrors } from '../errors/handleErrors';
 
 class SubscribeService {
     constructor(
@@ -39,9 +40,8 @@ class SubscribeService {
             };
             return this.handleMessage("Atualização realizada com sucesso.", updateGuest?.data, 200);
         } catch (error) {
-            // const err: AppError = error;
-            // throw new AppError(err?.message , err?.statusCode);
-            throw new AppError("Falha ao atualizar informações do convidado.", 500);
+            const err = handleErrors(error);
+            throw new AppError(err.message , err.statusCode);
         }
     }
 }

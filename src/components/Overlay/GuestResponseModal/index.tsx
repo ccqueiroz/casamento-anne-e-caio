@@ -11,6 +11,7 @@ import { GuestsModel } from '../../../data/model/Guests';
 import { ContentModalCode404 } from './ContentModalCode404';
 import { ContentModalCode208 } from './ContentModalCode208';
 import { useWindowSize } from '../../../hooks/useWindowSize';
+import { ContentModalCodeDontGo } from './ContentModalCode200DontGo';
 
 export interface ModalFileProps extends Omit<ChakraModalProps, 'children'> {
     statusCode?: number
@@ -37,11 +38,13 @@ const ModalGuestResponse: React.FC<Omit<ModalFileProps, 'widthScreen'>> = ({
 
     const renderContentModal = useMemo(() => {
         if (statusCode === 404) {
-           return <ContentModalCode404 />
+           return <ContentModalCode404 widthScreen={width}/>
         } else if (statusCode === 208) {
-            return <ContentModalCode208/>
-        }
-    }, [statusCode]);
+            return <ContentModalCode208 widthScreen={width}/>
+        } else if (statusCode === 200 && guest?.presenceAtTheEvent === 'N') {
+            return <ContentModalCodeDontGo widthScreen={width}/>
+        } else {}
+    }, [statusCode, guest, width]);
 
     const renderSizeModal = useMemo(() => {
         if (width && width <= 480) {

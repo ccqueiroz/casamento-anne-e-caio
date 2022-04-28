@@ -13,10 +13,11 @@ const FlyingHearts:React.FC<FlyingHearts> = ({numberOfHearts}) => {
         const components: Array<React.ReactElement> = []
         for (let i = 0; i < numberOfHearts; i++) {
             const left = generateRenderNumbers({ min: 2, max: 96 });
-            const bottom = generateRenderNumbers({ min: -50, max: -40 })
+            const bottom = generateRenderNumbers({ min: -43, max: -40 })
             const speed = generateRenderNumbers({ min: 20, max: 25 })
             components.push(
                 < ChakraBox
+                    key={i}
                     position="absolute"
                     zIndex={-1}
                     left={`${left}vw`}

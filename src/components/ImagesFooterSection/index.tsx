@@ -14,17 +14,12 @@ const ImagesFooterSection: React.FC<ImagesFooterSectionProps> = ({
 
     return (
         <Image
-            src={srcImage} width={{
-                base: "170px",
-                xl:"280px"
-            }}
-            height={{
-                lg:'70px',
-                '2xl': '86px'
-            }}
+            src={srcImage}
+            width="auto"
+            height="auto"
             alt={altimage}
             margin="0 auto"
-            objectFit="contain"
+            objectFit="cover"
             objectPosition="bottom"
             {...rest}
         />

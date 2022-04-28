@@ -1,5 +1,6 @@
-import { Box, Divider, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
+import { Divider } from '../Divider';
 
 interface HeaderDividerComponentProps {
     text: string
@@ -12,13 +13,14 @@ const HeaderDividerComponent: React.FC<HeaderDividerComponentProps> = ({
     return (
         <Box
             width="100%%"
-            maxWidth="1200px"
+            maxWidth="1350px"
             margin="0 auto"
             display="flex"
             justifyContent="center"
             alignItems="center"
+            height="60px"
         >
-            <Divider flexShrink={1} display={{ base: 'none', lg:'inline-block'}} bg="text.secondary" height="1px"/>
+            <Divider height="90%" flex={1} display={{ base: 'none', lg:'inline-block'}}/>
             <Text
                 fontSize={{
                     base: '1.25rem',
@@ -26,13 +28,13 @@ const HeaderDividerComponent: React.FC<HeaderDividerComponentProps> = ({
                 }}
                 color="text.secondary"
                 fontWeight="bold"
-                minWidth="18%"
-                flexShrink={1}
+                minWidth="auto"
                 textAlign="center"
+                wordBreak="unset"
             >
                 {text.toUpperCase()}
             </Text>
-            <Divider flexShrink={1} display={{ base: 'none', lg:'inline-block'}} bg="text.secondary" height="1px"/>
+            <Divider height="90%" flex={1} display={{ base: 'none', lg:'inline-block'}}/>
         </Box>
     );
 }

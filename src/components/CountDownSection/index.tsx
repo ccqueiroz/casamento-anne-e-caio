@@ -45,7 +45,7 @@ const CountDown: React.FC = () => {
             as="section"
             width="100vw"
             height="auto"
-            padding="1% 5%"
+            padding="0.5% 5% 0"
         >
             <HeaderCountDown />
             <CounterForTheDay

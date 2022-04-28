@@ -8,7 +8,7 @@ import { MapBuffet } from './MapBuffet';
 const FrontDesk: React.FC = () => {
 
     return (
-        <WrapperSections>
+        <WrapperSections padding = "0.5% 5% 0%">
             <HeaderFrontDesk />
             <BuffetPresentation />
             <MapBuffet />

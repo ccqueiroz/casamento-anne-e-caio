@@ -18,7 +18,10 @@ const DressCodeInformations: React.FC = () => {
             }}
             width="100%%"
             maxWidth="1200px"
-            margin="1.25rem auto 2.5rem"
+            margin={{
+                base: "1.25rem auto 2.5rem",
+                md: "1.25rem auto 3.5rem"
+            }}
         >
             <ContentTexts />
             <DressCodeImages />

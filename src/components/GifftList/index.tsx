@@ -6,7 +6,7 @@ import { HeaderGifftList } from './HeaderGifftList';
 
 const GifftList: React.FC = () => {
     return (
-        <WrapperSections>
+        <WrapperSections padding="0.5% 1% 0">
             <HeaderGifftList />
             <ContentGifftList />
             <ImagesFooterSection

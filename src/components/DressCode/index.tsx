@@ -11,12 +11,12 @@ const DressCode: React.FC = () => {
             as="section"
             width="100vw"
             height="auto"
-            padding="1% 5% 1%"
+            padding="0.5% 5% 0"
         >
             <HeaderDressCode />
             <DressCodeInformations />
             <ImagesFooterSection
-                srcImage="/images/layout/concha-titulo.png"
+                srcImage="/images/layout/conchas-top.png"
                 altimage="imagens de conchas"
             />
         </WrapperSections>

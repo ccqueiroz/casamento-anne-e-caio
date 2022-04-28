@@ -2,19 +2,12 @@ import { Box, Button, Text, useClipboard } from '@chakra-ui/react';
 import React, { useCallback } from 'react';
 
 const TextWithClipBoardPix: React.FC = () => {
-    const { hasCopied, onCopy } = useClipboard('04653621330');
-    
-    const handleClipBoard = useCallback(() => {
-        if (!hasCopied) {
-            onCopy()
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [hasCopied])
+    const { hasCopied, onCopy } = useClipboard('b57b76b6-3a5d-4ffc-9a01-28f8a43b82c6');
 
     return (
         <Box
             width="100%"
-            margin="1.5rem auto"
+            margin="1.5rem auto 2.25rem"
             display="flex"
             justifyContent="center"
             alignItems="center"

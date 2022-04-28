@@ -136,7 +136,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                 onOpen: onOpenGuestResponse
             });
         }).catch((err) => {
-            if (err?.response.status === 404) {
+            if (err?.response?.status === 404) {
                 handleOnOpenModalGuestResponses({
                     statusCode: err?.response?.status,
                     message: err?.response?.data,
@@ -165,7 +165,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                     <Input
                     id="email"
                     label={"E-mail"}
-                    type="e-mail"
+                    type="email"
                     placeholder="Digite seu e-mail"
                     error={errors.email}
                     height="3rem"

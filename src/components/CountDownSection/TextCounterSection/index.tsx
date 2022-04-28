@@ -14,18 +14,18 @@ const TextCounterSection: React.FC = () => {
             padding="1%"
         >
             <TextComponent
-                text="Criamos esse site para compartilhar com vocês os detalhes da organização do nosso casamento. Estamos muito felizes e contamos com a presença de todos no nosso grande dia!"
+                text="Bem-vindos ao nosso site de casamento. Criamos esse espaço para compartilhar com vocês os detalhes da nossa cerimônia e recepção desse momento tão especial. Estamos muito felizes e contamos com a presença de todos no nosso grande dia!"
             />
             <TextComponent
-                text="Aqui vocês encontrarão também dicas para hospedagem, salão de beleza, trajes, estacionamento, etc."
+                text="Aqui vocês encontrarão também informações sobre os trajes, localização do buffet, horário e etc."
                 marginTop="1rem"
             />
             <TextComponent
-                text="Ah, é importante também confirmar sua presença. Para isto contamos com sua ajuda clicando no menu “Confirme sua Presença” e preenchendo os dados necessários."
+                text="Ah, é importante também confirmar sua presença. Para isto contamos com sua ajuda clicando no menu “Confirme sua Presença” e preenchendo os dados necessários, principalmente com o passaporte de vacinação."
                 marginTop="1rem"
             />
             <TextComponent
-                text="Para nos presentear, escolha qualquer item da Lista de Casamento, seja um item de algum dos sites, lojas físicas, ou então vocês podem utilizar a opção de cotas. Fiquem à vontade!"
+                text="Para nos presentear, vamos deixar aqui o nosso pix b57b76b6-3a5d-4ffc-9a01-28f8a43b82c6 (Chave aleatória), Anne Caroline Oliveira Lima. Fiquem à vontade!"
                 marginTop="1rem"
             />
             <TextComponent

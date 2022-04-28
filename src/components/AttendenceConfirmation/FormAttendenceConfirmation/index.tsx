@@ -27,10 +27,16 @@ import { actionService } from '../../../services/subscribe';
 import { ModalGuestResponse } from '../../Overlay/GuestResponseModal';
 import { GuestResponseModal } from '../../../data/model/UserResponseModal';
 import { HandleMessageResponse } from '../../../data/model/Api/HandleMessageModel';
+import { ModalGuestResponseGoTo } from '../../Overlay/GuestResponseModalGoTo';
+
+type FunctionCallbackOpenModal = {
+    onOpen: () => void
+}
 
 const FormAttendenceConfirmation: React.FC = () => {
     const { onOpen: onOpenVaccineCard, ...propsModalVaccineCard } = useDisclosure();
     const { onOpen: onOpenGuestResponse, onClose: onCloseGuestResponse, ...propsModalGuestResponse } = useDisclosure();
+    const { onOpen: onOpenGuestResponseGoTo, onClose: onCloseGuestResponseGoTo, ...propsModalGuestResponseGoTo } = useDisclosure();
     const [dataGuestResponse, setDataGuestResponse] = useState<GuestResponseModal>({});
     const [filesData, setFilesData] = useState<Array<FileWithPreview>>([]);
     const [loadingRequest, setLoadingRequest] = useState<boolean>(false);
@@ -61,23 +67,34 @@ const FormAttendenceConfirmation: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleOnOpenModalGuestResponse = useCallback(({statusCode, message, guest}: GuestResponseModal) => {
-        setDataGuestResponse({
-            statusCode,
-            message,
-            guest,
-        })
-        onOpenGuestResponse();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const handleCloseModalGuestResponse = useCallback(() => {
+    const reset = useCallback(() => {
         setDataGuestResponse({});
         setFilesData([]);
         setValue('email', '');
         setValue('phone', '');
         setValue('presenceAtTheEvent', '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleOnOpenModalGuestResponses = useCallback(({statusCode, message, guest, onOpen}: GuestResponseModal & FunctionCallbackOpenModal) => {
+        setDataGuestResponse({
+            statusCode,
+            message,
+            guest,
+        })
+        onOpen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleCloseModalGuestResponse = useCallback(() => {
+        reset()
         onCloseGuestResponse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleCloseModalGuestResponseGoTo = useCallback(() => {
+        reset()
+        onCloseGuestResponseGoTo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -105,15 +122,25 @@ const FormAttendenceConfirmation: React.FC = () => {
         dataPost.append('vaccineFile', filesData[0])
 
         await actionService.subscribe(dataPost).then((res: HandleMessageResponse) => {
-            handleOnOpenModalGuestResponse({
+            if (res?.code === 200 && res?.guest?.presenceAtTheEvent === 'Y') {
+                handleOnOpenModalGuestResponses({
+                    guest: res.guest,
+                    statusCode: res.code,
+                    onOpen: onOpenGuestResponseGoTo
+                });
+                return
+            }
+            handleOnOpenModalGuestResponses({
                 guest: res.guest,
-                statusCode: res.code
+                statusCode: res.code,
+                onOpen: onOpenGuestResponse
             });
         }).catch((err) => {
             if (err?.response.status === 404) {
-                handleOnOpenModalGuestResponse({
+                handleOnOpenModalGuestResponses({
                     statusCode: err?.response?.status,
-                    message: err?.response?.data
+                    message: err?.response?.data,
+                    onOpen: onOpenGuestResponse
                 });    
             }
         }).finally(() => setLoadingRequest(false));
@@ -265,6 +292,13 @@ const FormAttendenceConfirmation: React.FC = () => {
                     </Button>
                 </Flex>
             </FormControl>
+            <ModalGuestResponseGoTo
+                onClose={handleCloseModalGuestResponseGoTo}
+                guest={dataGuestResponse?.guest}
+                statusCode={dataGuestResponse?.statusCode}
+                message={dataGuestResponse?.message}
+                {...propsModalGuestResponseGoTo}
+            />
             <ModalGuestResponse
                 onClose={handleCloseModalGuestResponse}
                 guest={dataGuestResponse?.guest}

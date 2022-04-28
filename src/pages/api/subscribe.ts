@@ -20,6 +20,7 @@ controllerSubscrible
             return response.status(guestResponse.code).json(guestResponse);
         } catch (error) {
             const err = handleErrors(error);
+            console.error(err)
             return response.status(err.statusCode).json({ data: err.message });
         }
     } else {

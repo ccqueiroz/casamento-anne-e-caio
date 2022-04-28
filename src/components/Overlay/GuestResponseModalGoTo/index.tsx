@@ -138,7 +138,7 @@ const ModalGuestResponseGoTo: React.FC<Omit<ModalFileProps, 'widthScreen'>> = ({
                         </Box>
                     </Box>
                 </ModalBody>
-                <FlyingHearts numberOfHearts={40} />
+                <FlyingHearts numberOfHearts={20} />
             </ModalContent>
         </ChakraModal>
     );

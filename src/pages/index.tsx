@@ -1,9 +1,10 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
+import { memo } from 'react'
 import { Layout } from '../components/Layout'
 import { Main } from '../components/Main'
 
-const Home: NextPage = () => {
+const Home: NextPage = ({}) => {
   return (
     <>
       <Head>
@@ -19,5 +20,12 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default memo(Home);
+
+export const getStaticProps: GetStaticProps = async () => {
+  return { 
+    props: {},
+    revalidate: 60 * 60 * 24 * 2 //48 horas
+   }
+}
 

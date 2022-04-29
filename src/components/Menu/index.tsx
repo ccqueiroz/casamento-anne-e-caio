@@ -14,7 +14,6 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MenuList, MenuListProps } from './menuList';
 import { excludeHashLink } from '../../data/utils/excludeHashLink';
-import { Brasao } from '../Brasao';
 const textShadow = `0.1rem 0.1rem 0.6rem`;
 
 const Menu: React.FC = () => {

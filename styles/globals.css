@@ -5,14 +5,19 @@
 }
 
 @font-face {
-  font-family: 'TimesRoman';
+  font-family: 'Times-Roman';
   src: url('../public/fonts/OPTITimes-Roman.otf') format('opentype');
+  font-weight: 'normal';
+}
+@font-face {
+  font-family: 'Times-Roman-Italic';
+  src: url('../public/fonts/OPTITimesRoman-Italic.otf') format('opentype');
   font-weight: 'normal';
 }
 
 @font-face {
-  font-family: 'TimesRoman-Italic';
-  src: url('../public/fonts/OPTITimesRoman-Italic.otf') format('opentype');
+  font-family: 'Philosopher-Italic';
+  src: url('../public/fonts/Philosopher-Italic.ttf') format('truetype');
   font-weight: 'normal';
 }
 
@@ -20,8 +25,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Abel-Text-Secondary;
-  scroll-behavior: smooth;
+  font-family: Times-Roman;
 }
 
 #__next {

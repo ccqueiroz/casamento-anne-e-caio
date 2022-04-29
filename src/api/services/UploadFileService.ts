@@ -5,12 +5,12 @@ import { PutObjectRequest } from "aws-sdk/clients/s3";
 import AppError from "../errors/typeErrors/AppError";
 
 aws.config.update({
-  secretAccessKey: process.env.AWS_SECRET_KEY,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRETKEY,
+  accessKeyId: process.env.AWS_ACCESSKEY,
 });
 
 const s3: aws.S3 = new aws.S3({
-     apiVersion: '2022-04-26', region: process.env.AWS_REGION
+     apiVersion: '2022-04-26', region: process.env.AWSREGION
 })
 
 class UploadFileService {
@@ -23,7 +23,7 @@ class UploadFileService {
             const fileaPath: PathOrFileDescriptor = fileFormatted.filepath;
             const fileContent: Buffer = fs.readFileSync(fileaPath);
             const params: PutObjectRequest = {
-                Bucket: String(process.env.AWS_BUCKET),
+                Bucket: String(process.env.AWSBUCKET),
                 Key: `${fileFormatted?.newFilename}-${fileFormatted?.originalFilename}`,
                 Body: fileContent,
             }

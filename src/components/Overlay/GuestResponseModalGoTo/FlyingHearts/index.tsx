@@ -1,7 +1,7 @@
 import { Image } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import { generateRenderNumbers } from '../../../../data/utils/generateRenderNumbers';
-import { ChakraBox } from '../ChakraBox';
+import { ChakraBox } from '../../../ChakraBox/ChakraBox';
 
 interface FlyingHearts{
     numberOfHearts: number;

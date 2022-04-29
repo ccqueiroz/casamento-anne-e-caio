@@ -9,6 +9,8 @@ const TextHeaderSection: React.FC<TextHeaderSectionProps> = ({
 
     return (
         <Text
+            
+            fontFamily="TimesRoman"
             letterSpacing="0.2rem"
             color="#0c6a6b"
             fontSize={{ base: "0.85rem", md: "0.95rem" }}

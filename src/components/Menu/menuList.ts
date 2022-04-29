@@ -5,22 +5,22 @@ export type MenuListProps = {
 export const MenuList: Array<MenuListProps> = [
     {
         name: "local e horário",
-        href:"#"
-    },
-    {
-        name: "nós",
-        href:"#"
-    },
-    {
-        name: "lista de presentes",
-        href:"#"
+        href:"frontDesk"
     },
     {
         name: "dress code",
-        href:"#"
+        href:"dressCode"
+    },
+    {
+        name: "cola no pix",
+        href:"gifftList"
     },
     {
         name: "#anneecaio",
-        href:"#"
+        href:"anneecaio"
+    },
+    {
+        name: "confirmação de presença",
+        href:"attendenceConfirmation"
     },
 ]

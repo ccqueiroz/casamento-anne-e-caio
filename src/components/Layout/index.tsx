@@ -8,13 +8,16 @@ import { GifftList } from '../GifftList';
 import { GallerySection } from '../GalleySection';
 import { FooterSection } from '../FooterSection';
 import { AttendenceConfirmation } from '../AttendenceConfirmation';
+import { ButtonToTopPage } from '../ButtonToTopPage';
 const Layout: React.FC = () => {
     return (
         <Box
+            id="layout"
             maxWidth="100%"
             display="flex"
             flexDirection="column"
             margin="0 auto"
+            position="relative"
         >
             <Hero />
             <CountDown />

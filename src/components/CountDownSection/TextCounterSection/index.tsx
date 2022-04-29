@@ -10,7 +10,7 @@ const TextCounterSection: React.FC = () => {
             width="100%"
             maxWidth="900px"
             height="auto"
-            margin="0 auto"
+            margin="0 auto 1rem"
             padding="1%"
         >
             <TextComponent
@@ -22,10 +22,6 @@ const TextCounterSection: React.FC = () => {
             />
             <TextComponent
                 text="Ah, é importante também confirmar sua presença. Para isto contamos com sua ajuda clicando no menu “Confirme sua Presença” e preenchendo os dados necessários, principalmente com o passaporte de vacinação."
-                marginTop="1rem"
-            />
-            <TextComponent
-                text="Para nos presentear, vamos deixar aqui o nosso pix b57b76b6-3a5d-4ffc-9a01-28f8a43b82c6 (Chave aleatória), Anne Caroline Oliveira Lima. Fiquem à vontade!"
                 marginTop="1rem"
             />
             <TextComponent

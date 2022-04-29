@@ -34,7 +34,7 @@ const FooterSection: React.FC = () => {
                 gap={6}
             >
                 <GridItem colSpan={{ base: 12, lg: 4 }} >
-                    <TextContentSection wordBreak="break-word" textAlign={{base: 'center', lg:'left'}} padding="0 0.5rem">
+                    <TextContentSection wordBreak="break-word" textAlign={{base: 'center', lg:'left'}} padding="0 0.5rem" fontFamily="Philosopher-Italic">
                         {'"Pois onde estiver o amor, alí estará também o nosso coração." Lc 12:34'}
                     </TextContentSection>
                 </GridItem>

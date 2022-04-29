@@ -31,7 +31,7 @@ const BuffetPresentation: React.FC = () => {
                     xl: '55%',
                     '2xl':'50%'
                 }}
-                margin="1rem auto 1rem"
+                margin="2rem auto"
             >
                 <TextComponent
                     text="Os noivos convidam para a cerimônia e recepção no dia 29 de maio de 2022, a partir de 15h30, no Atlantis Buffet, em Iparana, Caucaia. "

@@ -5,26 +5,19 @@
 }
 
 @font-face {
-  font-family: 'Abel-Text-Secondary';
-  src: url('../public/fonts/Abel-Regular.ttf') format('truetype');
+  font-family: 'Times-Roman';
+  src: url('../public/fonts/OPTITimes-Roman.otf') format('opentype');
+  font-weight: 'normal';
+}
+@font-face {
+  font-family: 'Times-Roman-Italic';
+  src: url('../public/fonts/OPTITimesRoman-Italic.otf') format('opentype');
   font-weight: 'normal';
 }
 
 @font-face {
-  font-family: 'BeauRivage-Text-Main';
-  src: url('../public/fonts/BeauRivage-Regular.ttf') format('truetype');
-  font-weight: 'normal';
-}
-
-@font-face {
-  font-family: 'Philospher-Header';
+  font-family: 'Philosopher-Italic';
   src: url('../public/fonts/Philosopher-Italic.ttf') format('truetype');
-  font-weight: 'normal';
-}
-
-@font-face {
-  font-family: 'HoneyFlorist';
-  src: url('../public/fonts/Honey-Florist-Personal-Use.otf') format('opentype');
   font-weight: 'normal';
 }
 
@@ -32,7 +25,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Abel-Text-Secondary;
+  font-family: Times-Roman;
 }
 
 #__next {

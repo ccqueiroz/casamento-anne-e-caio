@@ -7,7 +7,7 @@ import { HeaderAttendenceConfirmation } from './HeaderAttendenceConf';
 const AttendenceConfirmation: React.FC = () => {
 
     return (
-        <WrapperSections>
+        <WrapperSections id="attendenceConfirmation">
             <HeaderAttendenceConfirmation />
             <FormAttendenceConfirmation />
             <ImagesFooterSection

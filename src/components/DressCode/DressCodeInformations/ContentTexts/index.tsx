@@ -18,6 +18,10 @@ const ContentTexts: React.FC = () => {
                 <TextComponent
                     text="Passeio Completo"
                     textIndent={0}
+                    fontSize={{
+                        base: "1.5rem",
+                        lg:"1.9rem"
+                    }}
                 />
             </Box>
             <Box
@@ -29,14 +33,19 @@ const ContentTexts: React.FC = () => {
                     fontWeight="bold"
                     fontStyle="italic"
                     marginBottom="1.5rem"
+                    fontSize={{
+                        base: "1.3rem",
+                        lg:"1.7rem"
+                    }}
                 />
                 <TextComponent
                     text="Blusa, calça e sapato social. Terno e gravata é opcional. Lembrando que é um ambiente aberto, próximo à praia. Vá à vontade, mas seguindo as sugestões anteriores."
-                    fontSize={{
-                        base:"1rem",                        
-                    }}
                     lineHeight="1.5rem"
                     wordBreak="break-word"
+                    fontSize={{
+                        base: "1rem",
+                        lg:"1.2rem"
+                    }}
                 />
             </Box>
             <Box
@@ -48,14 +57,19 @@ const ContentTexts: React.FC = () => {
                     fontStyle="italic"
                     fontWeight="bold"
                     marginBottom="1.5rem"
+                    fontSize={{
+                        base: "1.3rem",
+                        lg:"1.7rem"
+                    }}
                 />
                 <TextComponent
                     text="Sugerimos vestidos leves, midi/curto. Lembre-se que o ambiente é aberto, próximo à praia, com muita grama, então invista em saltos mais baixos ou quadrados para seu conforto."
-                    fontSize={{
-                        base:"1rem",                        
-                    }}
                     lineHeight="1.5rem"
                     wordBreak="break-word"
+                    fontSize={{
+                        base: "1rem",
+                        lg:"1.2rem"
+                    }}
                 />
             </Box>
         </Flex>

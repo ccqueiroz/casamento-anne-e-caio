@@ -34,40 +34,43 @@ const EngagedAndDate: React.FC = () => {
 
     return (
         <Flex
+            position="relative"
+            maxHeight="100%"
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
             margin={{
-                base: "0 auto",
+                base: "1rem auto 0",
                 md: "15px auto 0 auto",
                 '2xl': "20px auto 0 auto"
             }}
         >
             <Text
-                as="span"
-                fontFamily="Abel-Text-Secondary"
+                as="h1"
+                fontFamily="TimesRoman-Italic"
                 fontSize={{ ...breakpointsFontSize({}) }}
                 color="text.secondary"
                 lineHeight={{ ...breakpointsLineHeight({}) }}
-                letterSpacing={'0.3rem'}
-                fontWeight="bold"
+                letterSpacing="0.3rem"
                 textShadow={textShadow}
             >
                 Anne Caroline & Caio Queiroz
             </Text>
             <Text
-                as="span"
-                fontFamily="Abel-Text-Secondary"
+                as="h2"
+                fontFamily="TimesRoman"
                 fontSize={{ ...breakpointsFontSize({sm: '1rem', md: '1.5rem', xl: '2rem', x2xl: '2rem'}) }}
                 color="text.secondary"
                 textAlign="center"
-                lineHeight={{...breakpointsLineHeight({})}}
+                lineHeight={{ ...breakpointsLineHeight({}) }}
+                letterSpacing="0.3rem"
                 textShadow={textShadow}
+                marginBottom={{base: "0.5rem"}}
             >
                 29.05.2022
             </Text>
-            <Image src="/images/layout/conchas-top.png" width="300" height={{
-                lg:'70px',
+            <Image src="/images/layout/conchas-top.png" width={{ base: "60%", lg: "300px" }} height={{
+                lg: '70px',
                 '2xl': '86px'
             }} alt="imagens de conchas"/>
         </Flex>

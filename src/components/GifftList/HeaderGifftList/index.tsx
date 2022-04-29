@@ -4,7 +4,7 @@ import { HeaderDividerComponent } from '../../HeaderDividerComponent';
 const HeaderGifftList: React.FC = () => {
     
     return (
-        <HeaderDividerComponent text="lista de presentes" />
+        <HeaderDividerComponent text="cola no pix" />
     );
 }
 

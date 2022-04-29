@@ -24,6 +24,7 @@ const InputUpload: React.FC<InputUploadProps> = ({
             flexDirection="column"
         >
             <Text
+                fontFamily="TimesRoman"
                 fontWeight="bold"
                 letterSpacing="0.2rem"
                 color="#0c6a6b"
@@ -53,6 +54,7 @@ const InputUpload: React.FC<InputUploadProps> = ({
                         </Link>
 
                         <Text
+                          fontFamily="TimesRoman"
                           textAlign="start"
                           fontSize="15"
                           fontWeight="regular"
@@ -73,22 +75,23 @@ const InputUpload: React.FC<InputUploadProps> = ({
                     ))}
                 </Flex>
                 <Flex width="100%" justifyContent="center">
-                    <Button
-                        disabled={filesData.length > 0}
-                        margin="0 auto"
-                        color="text.tertiary"
-                        padding="1rem"
-                        background="linear-gradient(45deg, #aadae9, #d6eef5)"
-                        transition="background 300ms easy-in-out"
-                        boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
-                        leftIcon={<RiUpload2Fill fontSize={22} color="text.tertiary"/>}
-                        _hover={{
-                            backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
-                        }}
-                        onClick={openModal}
-                    >
-                        Selecione o arquivo
-                    </Button>
+                  <Button
+                    fontFamily="TimesRoman"
+                    disabled={filesData.length > 0}
+                    margin="0 auto"
+                    color="text.tertiary"
+                    padding="1rem"
+                    background="linear-gradient(45deg, #aadae9, #d6eef5)"
+                    transition="background 300ms easy-in-out"
+                    boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
+                    leftIcon={<RiUpload2Fill fontSize={22} color="text.tertiary"/>}
+                    _hover={{
+                        backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
+                    }}
+                    onClick={openModal}
+                  >
+                    Selecione o arquivo
+                  </Button>
                 </Flex>
             </Flex>
         </Flex>

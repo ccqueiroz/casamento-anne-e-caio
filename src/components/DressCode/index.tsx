@@ -8,6 +8,7 @@ const DressCode: React.FC = () => {
 
     return (
         <WrapperSections
+            id="dressCode"
             as="section"
             width="100vw"
             height="auto"

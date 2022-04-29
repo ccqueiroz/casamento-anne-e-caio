@@ -15,7 +15,7 @@ const ImagesFooterSection: React.FC<ImagesFooterSectionProps> = ({
     return (
         <Image
             src={srcImage}
-            width="auto"
+            width={{ base: "70%", lg: "auto"}}
             height="auto"
             alt={altimage}
             margin="0 auto"

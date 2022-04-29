@@ -25,10 +25,6 @@ const TextCounterSection: React.FC = () => {
                 marginTop="1rem"
             />
             <TextComponent
-                text="Para nos presentear, vamos deixar aqui o nosso pix b57b76b6-3a5d-4ffc-9a01-28f8a43b82c6 (Chave aleatória), Anne Caroline Oliveira Lima. Fiquem à vontade!"
-                marginTop="1rem"
-            />
-            <TextComponent
                 text="Aguardamos vocês no nosso grande dia!"
                 textIndent={0}
                 marginTop="1rem"

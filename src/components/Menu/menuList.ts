@@ -12,7 +12,7 @@ export const MenuList: Array<MenuListProps> = [
         href:"dressCode"
     },
     {
-        name: "lista de presentes",
+        name: "cola no pix",
         href:"gifftList"
     },
     {

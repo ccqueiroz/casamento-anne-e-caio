@@ -52,7 +52,6 @@ const Main: React.FC<MainProps> = ({
                 {children}
             </Flex>
             <ButtonToTopPage isOpen={isOpen}/>                    
-
         </Box>
     )
 }

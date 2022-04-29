@@ -39,4 +39,4 @@ const ButtonToTopPage: React.FC<ButtonToTopPageParams> = ({isOpen}) => {
     );
  };
 
-export { ButtonToTopPage }
+export { ButtonToTopPage };

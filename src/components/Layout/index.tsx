@@ -1,18 +1,32 @@
 import React from 'react';
-import bg from '../../../public/images/bg-layout.png'
-import { Box, Text } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { Hero } from '../Hero';
-import { CountDown } from '../CountDown';
+import { CountDown } from '../CountDownSection';
+import { FrontDesk } from '../FrontDesk';
+import { DressCode } from '../DressCode';
+import { GifftList } from '../GifftList';
+import { GallerySection } from '../GalleySection';
+import { FooterSection } from '../FooterSection';
+import { AttendenceConfirmation } from '../AttendenceConfirmation';
+import { ButtonToTopPage } from '../ButtonToTopPage';
 const Layout: React.FC = () => {
     return (
         <Box
+            id="layout"
             maxWidth="100%"
             display="flex"
             flexDirection="column"
             margin="0 auto"
+            position="relative"
         >
             <Hero />
             <CountDown />
+            <FrontDesk />
+            <DressCode />
+            <GifftList />
+            <GallerySection />
+            <AttendenceConfirmation />
+            <FooterSection />
         </Box>
     );
 }

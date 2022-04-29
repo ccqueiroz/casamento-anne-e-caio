@@ -38,6 +38,7 @@ const Input = forwardRef<InputProps, 'input'>(
       <FormControl id={name} isInvalid={!!error} isRequired={isRequired} display="flex" flexDirection="column">
         <FormLabel
           fontWeight="bold"
+          fontFamily="TimesRoman"
           letterSpacing="0.2rem"
           color="text.tertiary"
           fontSize={{base:"1rem", md:"1.25rem"}}

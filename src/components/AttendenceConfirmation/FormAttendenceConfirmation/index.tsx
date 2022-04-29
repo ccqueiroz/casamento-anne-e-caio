@@ -151,7 +151,11 @@ const FormAttendenceConfirmation: React.FC = () => {
         <Box
             width="100%"
             maxWidth="700px"
-            margin="2rem auto 0.5rem"
+            margin={{
+                base: "0rem auto 0.5rem",
+                md: "0.5rem auto 0.5rem",
+                lg: "1rem auto 0.5rem"
+            }}
             as="form"
             onSubmit={handleSubmit(submit)}
         >

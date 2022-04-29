@@ -10,7 +10,7 @@ const TextCounterSection: React.FC = () => {
             width="100%"
             maxWidth="900px"
             height="auto"
-            margin="0 auto"
+            margin="0 auto 1rem"
             padding="1%"
         >
             <TextComponent

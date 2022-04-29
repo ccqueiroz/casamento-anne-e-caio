@@ -8,12 +8,13 @@ interface TextComponentProps extends Omit<TextProps, 'children'> {
 
 const TextComponent: React.FC<TextComponentProps> = ({
     text,
-    letterSpacing="0.2rem",
+    letterSpacing="0.16rem",
     color="text.tertiary",
     fontSize="1.2rem",
     lineHeight = "1.8rem",
     textIndent = 50,
-    textAlign="justify",
+    textAlign = "justify",
+    fontFamily = "TimesRoman",
     ...rest
 }) => {
     
@@ -24,6 +25,7 @@ const TextComponent: React.FC<TextComponentProps> = ({
             lineHeight={lineHeight}
             letterSpacing={letterSpacing}
             textAlign={textAlign}
+            fontFamily={fontFamily}
             style={{ textIndent }}
             {...rest}
         >

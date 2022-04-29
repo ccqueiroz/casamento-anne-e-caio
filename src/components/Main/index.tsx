@@ -1,5 +1,6 @@
-import { Box, Flex } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Flex,  useDisclosure } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { ButtonToTopPage } from '../ButtonToTopPage';
 
 interface MainProps {
     children: React.ReactNode
@@ -8,16 +9,38 @@ interface MainProps {
 const Main: React.FC<MainProps> = ({
     children
 }) => {
+    const { isOpen, onToggle } = useDisclosure();
+
+    useEffect(() => {
+        const callback = () => {
+            const oneParthOfVH = window.innerHeight / 100;
+            const elementHero = document.getElementById('hero')?.getBoundingClientRect()?.top;
+            if (elementHero && elementHero < -(oneParthOfVH * 59)) {
+                if (!isOpen) {
+                    onToggle();
+                }
+            } else {
+                if (isOpen) {
+                    onToggle();
+                }
+            }
+        }
+        document.getElementById('content-main')?.addEventListener('scroll', callback);
+        return () => document.getElementById('content-main')?.removeEventListener('scroll', callback);
+    });
+
     return (
         <Box
+            id="content-main"
             overflowX="hidden"
             width="100vw"
             minHeight="100vh"
             height="auto"
             bgGradient="linear(45deg, primaryColor.500)"
             backgroundSize="200% 200%"
-            position="relative"
+            scrollBehavior="smooth"
         >
+
             <Flex
                 id="container-main"
                 width="100%"
@@ -28,6 +51,8 @@ const Main: React.FC<MainProps> = ({
             >
                 {children}
             </Flex>
+            <ButtonToTopPage isOpen={isOpen}/>                    
+
         </Box>
     )
 }

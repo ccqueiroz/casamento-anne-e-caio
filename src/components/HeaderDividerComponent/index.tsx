@@ -31,6 +31,8 @@ const HeaderDividerComponent: React.FC<HeaderDividerComponentProps> = ({
                 minWidth="auto"
                 textAlign="center"
                 wordBreak="unset"
+                fontFamily="TimesRoman"
+                letterSpacing="0.15rem"
             >
                 {text.toUpperCase()}
             </Text>

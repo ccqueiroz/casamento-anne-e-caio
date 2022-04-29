@@ -44,6 +44,8 @@ const CounterForTheDayUI: React.FC<CounterForTheDayUIProps> = ({
                 alignItems="center"
             >
                 <Text
+                    fontFamily="TimesRoman"
+                    letterSpacing="0.15"
                     color="text.secondary"
                     fontSize={{
                         base: "1.3rem",
@@ -54,6 +56,8 @@ const CounterForTheDayUI: React.FC<CounterForTheDayUIProps> = ({
                 </Text>
             </Box>
             <Text
+                fontFamily="TimesRoman"
+                letterSpacing="0.15"
                 color="text.secondary"
                 fontSize={{
                     base: "1.3rem",

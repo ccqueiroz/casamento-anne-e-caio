@@ -1,0 +1,24 @@
+.ImageHero::after{
+    content: "";
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    box-shadow: inset 1px 0px 50px 15px rgb(214 238 245 / 70%)
+}
+@media(min-width: 900px){
+    .ImageHero::after{
+        border-radius: 21px;
+        box-shadow: inset 1px 0px 50px 35px rgb(214 238 245 / 70%)
+    }
+}
+@media(min-width: 1500px){
+    .ImageHero::after{
+        border-radius: 22px;
+        width: 100%;
+        box-shadow: inset 1px 0px 65px 50px rgb(214 238 245 / 70%)
+    }
+}

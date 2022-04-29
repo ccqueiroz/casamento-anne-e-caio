@@ -7,9 +7,10 @@ const GallerySection: React.FC = () => {
 
     return (
         <WrapperSections
+            id="anneecaio"
             padding={{
-                base: "2% 10% 2%",
-                lg:"1% 15% 1.5%"
+                base: "5% 10% 2%",
+                lg:"2% 15% 1.5%"
             }}
             height="auto"
         >

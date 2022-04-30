@@ -9,8 +9,7 @@ export default async function corsMiddleware(request: NextApiRequestModels, resp
         'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     );
     if (request.method === 'OPTIONS') {
-        response.status(200).end();
-        return;
+       return response.status(200).end();
     }
     next();
 } 

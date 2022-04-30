@@ -4,10 +4,12 @@ import { GuestsRepository } from '../../api/repositories/guestsRepository';
 import { SubscribeService } from '../../api/services/SubscribeService';
 import nextConnect from 'next-connect';
 import parseMultiPartyForm from '../../api/middlewares/multipartyFormMiddleware';
+import corsMiddleware from '../../api/middlewares/corsMiddleware';
 
 const controllerSubscrible = nextConnect();
 
 controllerSubscrible
+    .use(corsMiddleware)
     .use(parseMultiPartyForm)
     .put(async (request: NextApiRequestModels, response: NextApiResponseModels) => {
     if (request.method === 'PUT') {

@@ -5,13 +5,20 @@ import { SubscribeService } from '../../api/services/SubscribeService';
 import nextConnect from 'next-connect';
 import parseMultiPartyForm from '../../api/middlewares/multipartyFormMiddleware';
 import corsMiddleware from '../../api/middlewares/corsMiddleware';
+import Cors from 'cors';
+import initMiddleware from '../../api/middlewares/corsMiddleware';
 
 const controllerSubscrible = nextConnect();
-
+const cors = initMiddleware(
+    Cors({
+        methods: ['GET', 'POST', 'DELETE', 'OPTIONS', 'PUT'],
+    })
+) 
 controllerSubscrible
-    .use(corsMiddleware)
+    // .use(corsMiddleware)
     .use(parseMultiPartyForm)
     .put(async (request: NextApiRequestModels, response: NextApiResponseModels) => {
+    await cors(request, response);
     if (request.method === 'PUT') {
         try {
             const { email, presenceAtTheEvent, phone } = request.body;

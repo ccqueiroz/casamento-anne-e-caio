@@ -1018,6 +1018,11 @@
   dependencies:
     "axios" "*"
 
+"@types/cors@^2.8.12":
+  "integrity" "sha512-vt+kDhq/M2ayberEtJcIN/hxXy1Pk+59g2FV/ZQceeaTyCtCucjL2Q7FXlFjtWn4n15KCr1NE2lNNFhp0lEThw=="
+  "resolved" "https://registry.npmjs.org/@types/cors/-/cors-2.8.12.tgz"
+  "version" "2.8.12"
+
 "@types/formidable@^2.0.4":
   "integrity" "sha512-6HYcnmBCeby/nNGgX9kq1DxUpK2UcB3yoHCr3GzFjjqkpivOdcBSbsXP9NbxLcPEi11Fl/L41rbFCIsteF9sbg=="
   "resolved" "https://registry.npmjs.org/@types/formidable/-/formidable-2.0.4.tgz"

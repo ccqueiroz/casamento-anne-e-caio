@@ -17,6 +17,7 @@
     "aws-sdk": "^2.1121.0",
     "axios": "^0.26.1",
     "brazilian-values": "^0.10.1",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "faunadb": "^4.5.4",
     "formidable": "^2.0.1",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/cors": "^2.8.12",
     "@types/formidable": "^2.0.4",
     "@types/node": "17.0.23",
     "@types/react": "17.0.2",

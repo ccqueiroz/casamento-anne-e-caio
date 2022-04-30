@@ -23,12 +23,18 @@ controllerSubscrible
         console.log('response', response)
     if (request.method === 'PUT') {
         try {
-            const { email, presenceAtTheEvent, phone } = request.body;
-            const { files } = request;
-            const guestRepository = new GuestsRepository();
-            const guestService = new SubscribeService(guestRepository, { email, presenceAtTheEvent, phone }, files);
-            const guestResponse = await guestService.execute();
-            return response.status(guestResponse.code).json(guestResponse);
+            // const { email, presenceAtTheEvent, phone } = request.body;
+            // const { files } = request;
+            // const guestRepository = new GuestsRepository();
+            // const guestService = new SubscribeService(guestRepository, { email, presenceAtTheEvent, phone }, files);
+            // const guestResponse = await guestService.execute();
+            return response.status(200).json(response);
+            // const { email, presenceAtTheEvent, phone } = request.body;
+            // const { files } = request;
+            // const guestRepository = new GuestsRepository();
+            // const guestService = new SubscribeService(guestRepository, { email, presenceAtTheEvent, phone }, files);
+            // const guestResponse = await guestService.execute();
+            // return response.status(guestResponse.code).json(guestResponse);
         } catch (error) {
             const err = handleErrors(error);
             console.error(err)

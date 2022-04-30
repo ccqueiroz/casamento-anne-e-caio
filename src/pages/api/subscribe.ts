@@ -6,8 +6,8 @@ import nextConnect from 'next-connect';
 import parseMultiPartyForm from '../../api/middlewares/multipartyFormMiddleware';
 import corsMiddleware from '../../api/middlewares/corsMiddleware';
 
-const controllerSubscrible = nextConnect();
-controllerSubscrible
+const controllerSubscribe = nextConnect();
+controllerSubscribe
     .use(corsMiddleware)
     .use(parseMultiPartyForm)
     .put(async (request: NextApiRequestModels, response: NextApiResponseModels) => {
@@ -37,4 +37,4 @@ export const config = {
   },
 }
 
-export default controllerSubscrible;
+export default controllerSubscribe;

@@ -18,7 +18,7 @@ controllerSubscrible
     // .use(corsMiddleware)
     .use(parseMultiPartyForm)
     .put(async (request: NextApiRequestModels, response: NextApiResponseModels) => {
-        await cors(request, response);
+        // await cors(request, response);
         console.log('request', request)
         console.log('response', response)
     if (request.method === 'PUT') {

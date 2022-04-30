@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://www.casamentoanneecaio.com/:path*'
+      }
+    ]
+  },
   env: {
     AWS_SECRETKEY: process.env.AWS_SECRETKEY,
     AWS_ACCESSKEY: process.env.AWS_ACCESSKEY,

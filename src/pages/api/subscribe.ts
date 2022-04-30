@@ -16,7 +16,7 @@ const cors = initMiddleware(
 ) 
 controllerSubscrible
     // .use(corsMiddleware)
-    .use(parseMultiPartyForm)
+    // .use(parseMultiPartyForm)
     .put(async (request: NextApiRequestModels, response: NextApiResponseModels) => {
         // await cors(request, response);
         console.log('request', request)

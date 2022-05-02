@@ -1,4 +1,4 @@
-import { Box, Link, ScaleFade } from '@chakra-ui/react';
+import { Box, Button, Link, ScaleFade } from '@chakra-ui/react';
 import React from 'react';
 import { excludeHashLink } from '../../data/utils/excludeHashLink';
 import { HiArrowNarrowUp } from 'react-icons/hi';
@@ -9,10 +9,10 @@ type ButtonToTopPageParams = {
 const ButtonToTopPage: React.FC<ButtonToTopPageParams> = ({isOpen}) => {
     return (
         <ScaleFade initialScale={1} in={isOpen}>
-            <Box
+            <Button
                 id="buttonToTop"
                 position="absolute"
-                bottom="5%"
+                bottom={{base: "15%", md: "5%"}}
                 right="5%"
                 width="50px"
                 height="50px"
@@ -25,16 +25,16 @@ const ButtonToTopPage: React.FC<ButtonToTopPageParams> = ({isOpen}) => {
                 _hover={{
                     filter:"opacity(0.8)"
                 }}
+                onClick={() => excludeHashLink("hero")}
             >
-                <Link
-                    onClick={() => excludeHashLink("hero")}
+                <Box
                     title="Ir para o topo da página"
                     aria-describedby={`link âncora para ir topo da página.`}
                     aria-labelledby={"ir ao topo da página"}
                 >
                     <HiArrowNarrowUp color="#0c6a6b" size="1.5rem"/>
-                </Link>
-            </Box>
+                </Box>
+            </Button>
         </ScaleFade>
     );
  };

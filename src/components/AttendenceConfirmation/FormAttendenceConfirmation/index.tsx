@@ -87,13 +87,13 @@ const FormAttendenceConfirmation: React.FC = () => {
     }, []);
 
     const handleCloseModalGuestResponse = useCallback(() => {
-        reset()
+        reset();
         onCloseGuestResponse();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleCloseModalGuestResponseGoTo = useCallback(() => {
-        reset()
+        reset();
         onCloseGuestResponseGoTo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -115,11 +115,15 @@ const FormAttendenceConfirmation: React.FC = () => {
         }
         setLoadingRequest(true);
 
-        const dataPost = new FormData()
-        dataPost.append('email', data?.email)
-        dataPost.append('phone', data?.phone)
-        dataPost.append('presenceAtTheEvent', data?.presenceAtTheEvent)
-        dataPost.append('vaccineFile', filesData[0])
+        const dataPost = new FormData();
+        if (data?.email) {
+            dataPost.append('email', data?.email);
+        }
+        if (data?.presenceAtTheEvent) {
+            dataPost.append('presenceAtTheEvent', data?.presenceAtTheEvent);            
+        }
+        dataPost.append('phone', data?.phone);
+        dataPost.append('vaccineFile', filesData[0]);
 
         await actionService.subscribe(dataPost).then((res: HandleMessageResponse) => {
             if (res?.code === 200 && res?.guest?.presenceAtTheEvent === 'Y') {
@@ -142,7 +146,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                     message: err?.response?.data,
                     onOpen: onOpenGuestResponse
                 });
-                return
+                return;
             }
             toast.error('Falha no envio das informações. Por favor, tente novamente!');
         }).finally(() => setLoadingRequest(false));

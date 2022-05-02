@@ -1,7 +1,6 @@
 import { Expr } from 'faunadb';
-import { GuestsModel } from './../Guests/index';
-export type ReturnFaunaDBInEXPR = {
+export type ReturnFaunaDBInEXPR<T> = {
     ref: Expr,
     ts: number,
-    data: GuestsModel
+    data: T
 }

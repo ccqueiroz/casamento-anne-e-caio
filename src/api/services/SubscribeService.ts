@@ -23,11 +23,11 @@ class SubscribeService {
 
     public async execute(): Promise<HandleMessageResponse> {
         try {
-            const guest = await this.guestsRepository.queryGetGuests(this.guest.phone);
+            const guest = await this.guestsRepository.queryGetGuestByPhone(this.guest.phone);
             if (!guest.data) {
                 throw new AppError("Convidado não localizado", 404);
             };
-            if (guest?.data?.presenceAtTheEvent && guest.data?.presenceAtTheEvent === this.guest.presenceAtTheEvent) {
+            if (guest?.data?.presenceAtTheEvent && guest.data?.presenceAtTheEvent === this?.guest?.presenceAtTheEvent) {
                 return this.handleMessage("Convidado já confirmou sua participação.", guest.data, 208);
             }
             if (this.guest.presenceAtTheEvent === 'N') {

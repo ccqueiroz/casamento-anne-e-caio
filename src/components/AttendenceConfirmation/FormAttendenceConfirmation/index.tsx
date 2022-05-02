@@ -141,8 +141,10 @@ const FormAttendenceConfirmation: React.FC = () => {
                     statusCode: err?.response?.status,
                     message: err?.response?.data,
                     onOpen: onOpenGuestResponse
-                });    
+                });
+                return
             }
+            toast.error('Falha no envio das informações. Por favor, tente novamente!');
         }).finally(() => setLoadingRequest(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filesData]);

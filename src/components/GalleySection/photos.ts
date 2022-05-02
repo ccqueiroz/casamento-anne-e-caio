@@ -2,6 +2,7 @@ import { Photo } from "../../data/model/Gallery";
 
 export const photos: Array<Photo> = [
     {
+        id:"1",
         src: "/images/casal6.JPG",
         width: "100%",
         height: {
@@ -16,6 +17,7 @@ export const photos: Array<Photo> = [
         alt:"Anne e Caio com Puck"
     },
     {
+        id:"2",
         src: "/images/IMG_6604.JPG",
         width: "100%",
         height: {
@@ -33,6 +35,7 @@ export const photos: Array<Photo> = [
         alt:"Anne e Caio casamento civil"
     },
     {
+        id:'3',
         src: "/images/IMG_6602.JPG",
         width: "100%",
         height: {
@@ -47,6 +50,7 @@ export const photos: Array<Photo> = [
         alt:"Anne e Caio casamento civil"
     },
     {
+        id:'4',
         src: "/images/IMG_6601.JPG",
         width: {
             base: '100%',
@@ -63,6 +67,7 @@ export const photos: Array<Photo> = [
         alt:"Anne e Caio, foto do casamento civil"
     },
     {
+        id: '5',
         src: "/images/casal4.JPG",
         width: "100%",
         height: {
@@ -84,6 +89,7 @@ export const photos: Array<Photo> = [
     },
 
     {
+        id: '6',
         src: "/images/IMG_6596.JPG",
         width: "100%",
         height: {

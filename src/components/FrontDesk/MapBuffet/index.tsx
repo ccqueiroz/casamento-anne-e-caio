@@ -36,7 +36,7 @@ const MapBuffet: React.FC = () => {
 
     useEffect(() => {
         initialMap()
-    }, [ref, initialMap])
+    }, [ref, initialMap]);
 
     return (
         <Box

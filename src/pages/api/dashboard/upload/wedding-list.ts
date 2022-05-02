@@ -3,6 +3,7 @@ import { NextApiRequestModels, NextApiResponseModels } from '../../../../api/cli
 import { handleErrors } from '../../../../api/errors/handleErrors';
 import corsMiddleware from '../../../../api/middlewares/corsMiddleware';
 import parseMultiPartyForm from '../../../../api/middlewares/multipartyFormMiddleware';
+import { GuestsRepository } from '../../../../api/repositories/guestsRepository';
 import { ManageCsvDataService } from '../../../../api/services/manageCsvDataService';
 
 const controllerUploadWeddingList = nextConnect();
@@ -13,8 +14,9 @@ controllerUploadWeddingList
     if (request.method === 'POST') {
         try {
             const { files } = request;
-            const convertCSVTOJSON = await new ManageCsvDataService(files).execute();
-            return response.status(200).json({data:'ok'});
+            const guestRepository = new GuestsRepository(); 
+            const convertCSVTOJSON = await new ManageCsvDataService(files, guestRepository).execute();
+            return response.status(200).json({data:convertCSVTOJSON});
         } catch (error) {
             const err = handleErrors(error);
             console.error(err)

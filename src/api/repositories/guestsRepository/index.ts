@@ -1,12 +1,28 @@
-import { query as q } from 'faunadb';
+import { Expr, query as q } from 'faunadb';
 import { fauna } from '../../../lib/clients/fauna';
 import { GuestsFaunaDB, GuestsModel } from '../../../data/model/Guests';
+import { ReturnFaunaDBInEXPR } from '../../../data/model/Api/FaunaDB';
 
 class GuestsRepository {
     private readonly colletion = 'guests';
 
-    //get
-    public async queryGetGuests(phone: string): Promise<GuestsFaunaDB> {
+    public async queryGetAllGuests() {
+        const guests = await fauna.query<Expr>(
+            q.Map(
+                q.Paginate(
+                    q.Match(q.Index("get_all_guests"))
+                ),
+                q.Lambda("X", q.Get(q.Var("X")))
+            )
+        ).then((res) => res).catch(err => err);
+        if (guests?.data) {
+            return guests?.data?.map((guest: ReturnFaunaDBInEXPR) => guest?.data)
+        }
+        return [];
+    }
+
+    //getByPhone
+    public async queryGetGuestByPhone(phone: string): Promise<GuestsFaunaDB> {
         const guest = await fauna.query<GuestsFaunaDB>(
             q.Get(q.Match(
                 q.Index('guests_by_phone'), phone

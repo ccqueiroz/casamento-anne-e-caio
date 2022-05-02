@@ -6,6 +6,6 @@ export const excludeHashLink = (id: string | undefined) => {
             top: element ? element : 0,
             behavior: 'smooth'
         };
-        document.getElementById('content-main')?.scrollTo(scrollOptions);   
+        setTimeout(() => document.getElementById('content-main')?.scroll(scrollOptions), 100);
     }
 };

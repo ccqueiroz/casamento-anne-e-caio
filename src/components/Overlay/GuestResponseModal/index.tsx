@@ -41,7 +41,7 @@ const ModalGuestResponse: React.FC<Omit<ModalFileProps, 'widthScreen'>> = ({
         if (statusCode === 404) {
            return <ContentModalCode404 widthScreen={width}/>
         } else if (statusCode === 208) {
-            return <ContentModalCode208 widthScreen={width}/>
+            return <ContentModalCode208 widthScreen={width} guest={guest}/>
         } else if (statusCode === 200 && guest?.presenceAtTheEvent === 'N') {
             return <ContentModalCodeDontGo widthScreen={width}/>
         } else {}

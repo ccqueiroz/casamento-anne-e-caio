@@ -267,7 +267,7 @@ const FormAttendenceConfirmation: React.FC = () => {
                 </GridItem>
                 {
                     getValues('presenceAtTheEvent') === 'Y' && (
-                        <GridItem mb="2.5rem">
+                        <GridItem >
                             <InputUpload
                                 openModal={onOpenVaccineCard}
                                 filesData={filesData}

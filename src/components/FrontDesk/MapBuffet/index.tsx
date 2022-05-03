@@ -8,8 +8,8 @@ declare var google: google;
 
 const MapBuffet: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null);
-    const coordAtlantis: google.maps.LatLng | google.maps.LatLngLiteral = { lat: -3.693676673767132, lng: -38.59859212762528 }
     const initialMap = useCallback((): void => {
+        const coordAtlantis: google.maps.LatLng | google.maps.LatLngLiteral = { lat: -3.693676673767132, lng: -38.59859212762528 };
         const map = new google.maps.Map(
             ref.current as HTMLElement,
             {

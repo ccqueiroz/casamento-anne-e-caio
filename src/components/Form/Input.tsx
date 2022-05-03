@@ -13,11 +13,14 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react'
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { IconBaseProps, IconType } from 'react-icons/lib';
 
 interface InputProps extends ChakraInputProps {
   label?: string
   error?: FieldError
   actionDuration?: boolean
+  IconType?: IconType | undefined
+  iconTypeProps?: IconBaseProps
 }
 
 const Input = forwardRef<InputProps, 'input'>(
@@ -29,6 +32,8 @@ const Input = forwardRef<InputProps, 'input'>(
       type = 'text',
       actionDuration = false,
       isRequired = false,
+      IconType,
+      iconTypeProps,
       ...rest
     },
     ref
@@ -47,13 +52,24 @@ const Input = forwardRef<InputProps, 'input'>(
           {label}
         </FormLabel>
         <InputGroup>
-          <InputLeftElement mt={"1%"} ml="5px">
-            {
-              type === 'phone' ?
-                (<FaWhatsapp fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
-                : (<AiOutlineMail fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
-            }
-          </InputLeftElement>
+          {
+            IconType ? (
+              <InputLeftElement ml="5px">
+                {
+                  IconType ? <IconType fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" {...iconTypeProps}/> : null
+                }
+              </InputLeftElement>
+            ): (
+              <InputLeftElement mt={"1%"} ml="5px">
+                {
+                  type === 'phone' ?
+                    (<FaWhatsapp fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
+                    : type === 'email' ? (<AiOutlineMail fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
+                      : null
+                }
+              </InputLeftElement> 
+            )
+          }
           <ChakraInput
             name={name}
             type={type}

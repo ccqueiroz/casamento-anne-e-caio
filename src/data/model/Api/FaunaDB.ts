@@ -1,6 +1,7 @@
-import { Expr } from 'faunadb';
 export type ReturnFaunaDBInEXPR<T> = {
-    ref: Expr,
+    ref: {
+        id: string
+    },
     ts: number,
     data: T
 }

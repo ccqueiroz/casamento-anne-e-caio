@@ -33,6 +33,7 @@ const ContentModalCode208: React.FC<Pick<ModalFileProps, 'widthScreen'  | 'guest
             }
         }
     }, [guest]);
+
     return (
         <Box mb="0.5rem">
             <TextComponent

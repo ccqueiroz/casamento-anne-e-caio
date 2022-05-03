@@ -73,7 +73,7 @@ const ModalGuestResponseGoTo: React.FC<Omit<ModalFileProps, 'widthScreen'>> = ({
             <ModalContent borderRadius={5} p={5} >
                 {guest && guest.name && (
                     <ModalHeader fontSize="1.5rem" color="#0c6a6b">
-                        {convertFirstLetterEachWorldToUppercase("caio queiroz")},
+                        {convertFirstLetterEachWorldToUppercase(guest.name)},
                     </ModalHeader>
                 )}
                 <ModalCloseButton color="primary" />

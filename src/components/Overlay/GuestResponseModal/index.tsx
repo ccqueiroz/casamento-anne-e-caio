@@ -12,6 +12,7 @@ import { ContentModalCode404 } from './ContentModalCode404';
 import { ContentModalCode208 } from './ContentModalCode208';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { ContentModalCodeDontGo } from './ContentModalCode200DontGo';
+import { convertFirstLetterEachWorldToUppercase } from '../../../data/utils/convertFirstLetterEachWorldToUppercase';
 
 export interface ModalFileProps extends Omit<ChakraModalProps, 'children'> {
     statusCode?: number
@@ -33,7 +34,7 @@ const ModalGuestResponse: React.FC<Omit<ModalFileProps, 'widthScreen'>> = ({
         if (statusCode && statusCode === 404) {
             return 'Atenção';
         }
-        return `Olá ${guest?.name},`;
+        return `Olá ${convertFirstLetterEachWorldToUppercase(guest?.name)},`;
     }, [statusCode, guest]);
 
     const renderContentModal = useMemo(() => {

@@ -1,4 +1,4 @@
-import { Expr, query as q } from 'faunadb';
+import { query as q } from 'faunadb';
 import { fauna } from '../../../lib/clients/fauna';
 import { UserAdmin } from '../../../data/model/UserAdmin';
 import { ReturnFaunaDBInEXPR } from '../../../data/model/Api/FaunaDB';

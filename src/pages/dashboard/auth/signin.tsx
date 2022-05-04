@@ -1,10 +1,11 @@
 import React, {memo} from 'react';
 import { Box, Flex, Image, Button } from '@chakra-ui/react';
-import { Input } from '../../../components/Form/Input';
 import { WrapperSections } from '../../../components/WrapperSections';
-
-const SingUp: React.FC = () => {
-
+import { signIn } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
+import { FcGoogle } from 'react-icons/fc';
+const SignIn: React.FC = () => {
     return (
         <WrapperSections
             id="dashboard"
@@ -46,22 +47,22 @@ const SingUp: React.FC = () => {
                 flexDirection="column"
             >
                 <Box
-                    width="60%"
+                    width={{ base: "100%", md: "70%", lg: "50%" }}
+                    maxWidth="516px"
                     backgroundImage="linear-gradient(270deg, #93c2c2, #aadae9, #93d1e4, #d6eef5)"
                     boxShadow="1px 3px 5px 2px rgba(74, 97, 97, 0.5)"
                     margin="0 auto"
-                    padding="2rem 5rem"
+                    padding={{ base: "2rem 2rem", md: "2rem 5rem"}}
                     borderRadius="15px"
                 >
-                    <Box position="relative" height="70px">
+                    <Box position="relative" height="70px" minWidth="240px" maxWidth="300px" margin="0 auto">
                         <Image
                             position="absolute"
                             left={{base: "48%"}}
-                            top={{base: "0px", md: "5px"}}
                             transform="translateX(-50%)"
                             src="/images/brasao-main.svg"
                             alt="logo do casal Anne e Caio"
-                            width={{base: "165px", md: "30%"}}
+                            width={{base: "60%", lg: "65%"}}
                             height="100%"
                             objectFit="cover"
                             objectPosition="center"
@@ -69,55 +70,55 @@ const SingUp: React.FC = () => {
                             filter="drop-shadow(0px 0px 3px #93c2c2)"
                         />
                     </Box>
-                    <Flex flexDirection="column" gap={4}>
-                        <Input
-                            id="email"
-                            label={"E-mail"}
-                            type="email"
-                            placeholder="Digite seu e-mail"
-                            // error={errors.email}
-                            height="3rem"
-                            // {...register('email')}
-                        />
-                        <Input
-                            id="email"
-                            label={"Senha"}
-                            type="email"
-                            placeholder="Digite sua senha"
-                            // error={errors.email}
-                            height="3rem"
-                            // {...register('email')}
-                        />
-                    </Flex>
                     <Flex
-                    width="100%"
-                    justifyContent="center"
-                    alignItems="center"
-                    margin="0 auto"
-                >
-                    <Button
-                        type="submit"
-                        margin="1.25rem auto"
-                        padding="2%"
-                        fontWeight="bold"
-                        letterSpacing="0.2rem"
-                        color="#0c6a6b"
-                        fontSize={{ base: "1rem", md: "1.15rem" }}
-                        background="linear-gradient(45deg, #aadae9, #d6eef5)"
-                        transition="background 300ms easy-in-out"
-                        boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
-                        // isLoading={loadingRequest}
-                        _hover={{
-                            backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
-                        }}
+                        width="100%"
+                        minWidth="240px"
+                        maxWidth="350px"
+                        justifyContent="center"
+                        alignItems="center"
+                        margin="0 auto"
                     >
-                        Enviar             
-                    </Button>
-                </Flex>
+                        <Button
+                            width="100%"
+                            height={{base: "40px", md: "50px"}}
+                            onClick={() => signIn('google')}
+                            type="button"
+                            margin="1.25rem auto"
+                            padding="2%"
+                            fontWeight="bold"
+                            letterSpacing="0.2rem"
+                            color="#0c6a6b"
+                            fontSize={{ base: "0.8rem", md: "1rem", lg:"1rem" }}
+                            background="linear-gradient(45deg, #aadae9, #d6eef5)"
+                            transition="background 300ms easy-in-out"
+                            boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
+                            leftIcon={<FcGoogle size="1.25rem"/>}
+                            _hover={{
+                                backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
+                            }}
+                        >
+                            Fazer Login com Google            
+                        </Button>
+                    </Flex>
                 </Box>
             </Box>
         </WrapperSections>
     );
 };
 
-export default memo(SingUp);
+export default memo(SignIn);
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+    const session = await getSession({ req });
+    if(session){
+        return {
+            redirect:{
+                destination: `/dashboard`,
+                permanent: false
+            }
+        };
+    }
+    return {
+        props:{}
+    }
+}

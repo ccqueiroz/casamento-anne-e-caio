@@ -80,10 +80,10 @@ const MapBuffet: React.FC = () => {
     }, [departurePlace]);
 
     useLayoutEffect(() => {
-        if (typeof google !== 'undefined') {
+        // if (typeof google !== 'undefined') {
             console.log('typeof google é diferente undefined', google)
             initialMap(departurePlace);
-        }
+        // }
     }, [ref, initialMap, departurePlace]);
 
     return (

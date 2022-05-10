@@ -30,12 +30,12 @@ function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps) {
     }, [router]);
 
     return (
-        <SessionProvider session={session}>
+        // <SessionProvider session={session}>
             <ChakraProvider theme={theme}>
                 <Component {...pageProps} />
                 <Toaster position="bottom-right" />
             </ChakraProvider>
-        </SessionProvider>
+        // </SessionProvider>
 
   );
 }

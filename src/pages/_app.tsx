@@ -11,7 +11,7 @@ import '../../public/NprogressCSS/index.css';
 
 const theme = extendTheme({ colors });
 
-function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps) {
+function MyApp({ Component, pageProps: {...pageProps}}: AppProps) {
     const router = useRouter();
 
     useEffect(() => {

@@ -81,7 +81,7 @@ const SignIn: React.FC = () => {
                         <Button
                             width="100%"
                             height={{base: "40px", md: "50px"}}
-                            onClick={() => signIn('google')}
+                            // onClick={() => signIn('google')}
                             type="button"
                             margin="1.25rem auto"
                             padding="2%"
@@ -109,15 +109,15 @@ const SignIn: React.FC = () => {
 export default memo(SignIn);
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-    const session = await getSession({ req });
-    if(session){
-        return {
-            redirect:{
-                destination: `/dashboard/lista-de-convidados`,
-                permanent: false
-            }
-        };
-    }
+    // const session = await getSession({ req });
+    // if(session){
+    //     return {
+    //         redirect:{
+    //             destination: `/dashboard/lista-de-convidados`,
+    //             permanent: false
+    //         }
+    //     };
+    // }
     return {
         props:{}
     }

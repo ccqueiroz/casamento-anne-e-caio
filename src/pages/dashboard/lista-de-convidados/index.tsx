@@ -58,19 +58,19 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
 export default memo(GuestList);
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-    const session = await getSession({ req });
-    if(!session){
-        return {
-            redirect:{
-                destination: `/`,
-                permanent: false
-            }
-        };
-    }
+    // const session = await getSession({ req });
+    // if(!session){
+    //     return {
+    //         redirect:{
+    //             destination: `/`,
+    //             permanent: false
+    //         }
+    //     };
+    // }
     const guestsList = await actionDashboard.guestsList();
     return {
         props: {
-            ...session,
+            // ...session,
             guestsList
         }
     }

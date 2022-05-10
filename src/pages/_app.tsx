@@ -11,7 +11,7 @@ import '../../public/NprogressCSS/index.css';
 
 const theme = extendTheme({ colors });
 
-function MyApp({ Component, pageProps: {...pageProps}}: AppProps) {
+function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps) {
     const router = useRouter();
 
     useEffect(() => {
@@ -30,12 +30,12 @@ function MyApp({ Component, pageProps: {...pageProps}}: AppProps) {
     }, [router]);
 
     return (
-        // <SessionProvider session={session}>
+        <SessionProvider session={session}>
             <ChakraProvider theme={theme}>
                 <Component {...pageProps} />
                 <Toaster position="bottom-right" />
             </ChakraProvider>
-        // </SessionProvider>
+        </SessionProvider>
 
   );
 }

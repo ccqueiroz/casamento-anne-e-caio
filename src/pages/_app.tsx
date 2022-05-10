@@ -28,9 +28,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps) {
             router.events.off('routeChangeError', handleStop)
         }
     }, [router]);
-    console.log('session My App=> ', session)
-                console.log('process.env.GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID)
-            console.log('process.env.GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_SECRET)
+
     return (
         <SessionProvider session={session}>
             <ChakraProvider theme={theme}>

@@ -1,5 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
+import Script from 'next/script'
 import { memo } from 'react'
 import { Layout } from '../components/Layout'
 import { Main } from '../components/Main'
@@ -47,6 +48,7 @@ const Home: NextPage = ({}) => {
         <meta name="twitter:site" content="@caiocezardeque1" />
         <meta name="twitter:creator" content="@caiocezardeque1"/>
       </Head>
+      <Script src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`}></Script>
       <Main>
           <Layout />
       </Main>

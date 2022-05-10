@@ -1,8 +1,5 @@
 import React, {memo, PropsWithChildren} from 'react';
 import { Box, useDisclosure } from '@chakra-ui/react';
-import { getSession } from 'next-auth/react';
-import { GetServerSideProps } from 'next';
-import { SessionProps } from '../../../data/model/Session';
 import { WrapperSections } from '../../../components/WrapperSections';
 import { DrawerDashboard } from '../../../components/DrawerDashboard';
 import { MenuHeaderDashboard } from '../../../components/MenuHeaderDashboard';

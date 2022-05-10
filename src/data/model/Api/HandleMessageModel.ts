@@ -1,7 +1,7 @@
 import { GuestsModel } from "../Guests";
 
-export type HandleMessageResponse = {
+export type HandleMessageResponse<T = GuestsModel> = {
     message: string,
-    guest: GuestsModel,
+    guest: T,
     code: number
 }

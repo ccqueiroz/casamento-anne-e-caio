@@ -6,13 +6,13 @@ import { ReturnFaunaDBInEXPR } from '../../../data/model/Api/FaunaDB';
 class GuestsRepository {
     private readonly colletion = 'guests';
 
-    public async queryGetAllGuests() {
+    public async queryGetAllGuests(size: number = 50) {
         const guests = await fauna.query<Expr>(
             q.Map(
                 q.Paginate(
-                    q.Match(q.Index("get_all_guests"))
+                    q.Match(q.Index("get_all_guests")),{ size }
                 ),
-                q.Lambda("X", q.Get(q.Var("X")))
+                q.Lambda((x) => q.Get(x))
             )
         ).then((res) => res).catch(err => err);
         if (guests?.data) {

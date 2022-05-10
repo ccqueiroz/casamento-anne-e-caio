@@ -8,7 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 const SignIn: React.FC = () => {
     return (
         <WrapperSections
-            id="dashboard"
+            id="sigin"
             width="100vw"
             height="100vh"
             margin="0px auto 0px auto"
@@ -113,7 +113,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     if(session){
         return {
             redirect:{
-                destination: `/dashboard`,
+                destination: `/dashboard/lista-de-convidados`,
                 permanent: false
             }
         };

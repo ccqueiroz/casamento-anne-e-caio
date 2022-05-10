@@ -2,7 +2,7 @@ import { Text, TextProps } from '@chakra-ui/react';
 import React from 'react';
 
 interface TextComponentProps extends Omit<TextProps, 'children'> {
-    text: string,
+    text: string | undefined,
     textIndent?: number
 }
 

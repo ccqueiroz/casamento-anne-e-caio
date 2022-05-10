@@ -1,6 +1,8 @@
+import { GuestsModel } from "../Guests";
 import { UserAdmin } from "../UserAdmin";
 
-export type SessionProps = {
+export type SessionProps<T = GuestsModel> = {
     user: UserAdmin,
-    expires: string
+    expires: string,
+    data: T
 }

@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { DirectionsParams } from '../../../data/model/Maps';
 import { calcRoute } from './calcRoute';
+import { useLayoutEffect } from 'react';
 
 declare var google: google;
 
@@ -78,8 +79,11 @@ const MapBuffet: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [departurePlace]);
 
-    useEffect(() => {
-        initialMap(departurePlace);
+    useLayoutEffect(() => {
+        if (typeof google !== 'undefined') {
+            console.log('typeof google é diferente undefined', google)
+            initialMap(departurePlace);
+        }
     }, [ref, initialMap, departurePlace]);
 
     return (

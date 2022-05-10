@@ -11,7 +11,7 @@ const FrontDesk: React.FC = () => {
         <WrapperSections id="frontDesk" padding ="0.5% 5% 0%">
             <HeaderFrontDesk />
             <BuffetPresentation />
-            {/* <MapBuffet /> */}
+            <MapBuffet />
             <ImagesFooterSection
                 width={{ base: "60%", lg: "auto"}}
                 srcImage="/images/layout/concha-titulo.png"

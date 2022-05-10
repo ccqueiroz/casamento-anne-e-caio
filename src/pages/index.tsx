@@ -10,7 +10,7 @@ const Home: NextPage = ({}) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="theme-color" content="#d6eef5" />
-        <meta name="google-signin-client_id" content={process.env.GOOGLE_CLIENT_ID} />
+        {/* <meta name="google-signin-client_id" content={process.env.GOOGLE_CLIENT_ID} /> */}
         {/* meta theme-color para safari */}
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="black"/>

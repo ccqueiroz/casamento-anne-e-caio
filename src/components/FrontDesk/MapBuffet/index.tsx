@@ -18,6 +18,12 @@ declare var google: google;
 const MapBuffet: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null);
     const [departurePlace, setDeparturePlace] = useState<string | undefined>(undefined);
+    const [googleIsDefined, setGoogleIsDefined] = useState<string | null>(() => {
+        if (typeof google !== 'undefined') {
+            return 'loaded';
+        }
+        return null;
+    });
     const searchDeparturePlaceFormSchema = yup.object().shape({origin: yup.string()});
     const {
         register,
@@ -79,12 +85,21 @@ const MapBuffet: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [departurePlace]);
 
+    useEffect(() => {
+        const callback = () => {
+            if (typeof google !== 'undefined') {
+                setGoogleIsDefined('loaded')
+            }
+        }
+        window?.addEventListener('load', callback);
+        return () => window?.removeEventListener('load', callback);
+    });
+
     useLayoutEffect(() => {
-        if (typeof google !== 'undefined') {
-            console.log('typeof google é diferente undefined', google)
+        if (googleIsDefined !== null) {
             initialMap(departurePlace);
         }
-    }, [ref, initialMap, departurePlace, typeof google]);
+    }, [ref, initialMap, departurePlace, googleIsDefined]);
 
     return (
         <Box

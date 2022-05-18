@@ -1,3 +1,4 @@
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import {
     Box,
     Button,
@@ -11,7 +12,6 @@ import {
     Text,
     useDisclosure
 } from '@chakra-ui/react';
-import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Input } from '../../Form/Input';
 import InputMask from 'react-input-mask';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'

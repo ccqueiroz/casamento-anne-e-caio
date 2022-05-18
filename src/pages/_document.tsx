@@ -9,7 +9,6 @@ export default class MyDocument extends Document{
                     <link rel="apple-touch-icon" href="/favicon.ico" sizes="180x180"/>
                     <link rel="shortcut icon" href="/favicon.png" type="image/png" />
                     <link rel="canonical" href="https://www.casamentoanneecaio.com"/>
-                    <script src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`} async defer />
                 </Head>
                 <body>
                     <Main />

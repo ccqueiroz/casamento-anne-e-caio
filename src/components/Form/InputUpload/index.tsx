@@ -5,17 +5,20 @@ import { MdClose } from 'react-icons/md';
 import { FileWithPreview } from '../../../data/model/Files';
 
 interface InputUploadProps {
-    openModal: () => void,
-    deleteAttachment: (fileName: string) => void,
-    filesData: Array<FileWithPreview>,
+  openModal: () => void,
+  deleteAttachment: (fileName: string) => void,
+  filesData: Array<FileWithPreview>,
+  urlFile?: string | undefined
 }
 
 const InputUpload: React.FC<InputUploadProps> = ({
-    openModal,
-    deleteAttachment,
-    filesData,
+  openModal,
+  deleteAttachment,
+  filesData,
+  urlFile
 }) => {
-    return (
+
+  return (
         <Flex
             width="100%"
             maxWidth="600px"
@@ -39,8 +42,44 @@ const InputUpload: React.FC<InputUploadProps> = ({
               mt="1.5rem"
               width="100%"
               flexDirection="column"
-            >
-              <Flex flexDirection={'column'} mb="2rem">
+        >
+          {
+            urlFile ?
+              (
+                <Flex flexDirection={'column'} mb="2rem">
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      minW="26.56rem"
+                      w="26.56rem"
+                    >
+                      <Link href={urlFile} isExternal height="auto" display="flex" alignItems="center" mr="8px">
+                        <Icon as={RiAttachment2} fontSize="20" />
+                      </Link>
+
+                      <Text
+                        fontFamily="TimesRoman"
+                        textAlign="start"
+                        fontSize="15"
+                        fontWeight="regular"
+                        w="100%"
+                      >
+                        {urlFile?.substr(0, 40)}
+                      </Text>
+                      <Icon
+                        as={MdClose}
+                        onClick={() => deleteAttachment('')}
+                        fontSize="20"
+                        color="#FF4D4D"
+                        _hover={{
+                          cursor: 'pointer',
+                        }}
+                      />
+                    </Flex>
+                </Flex>
+              ) :
+              (
+                <Flex flexDirection={'column'} mb="2rem">
                   {filesData?.map((file: FileWithPreview, index: number) => (
                     <Flex
                       key={index}
@@ -73,7 +112,9 @@ const InputUpload: React.FC<InputUploadProps> = ({
                       />
                     </Flex>
                   ))}
-              </Flex>
+                </Flex>
+              )
+          }
               <Flex width="100%" justifyContent="center">
                 <Button
                   fontFamily="TimesRoman"

@@ -12,6 +12,7 @@ const nextConfig = {
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    SECRET_KEY: process.env.SECRET_KEY
   },
   async headers() {
     return [

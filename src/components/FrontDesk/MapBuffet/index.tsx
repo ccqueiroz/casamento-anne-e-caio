@@ -11,12 +11,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { DirectionsParams } from '../../../data/model/Maps';
 import { calcRoute } from './calcRoute';
+import { useLayoutEffect } from 'react';
 
 declare var google: google;
 
 const MapBuffet: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null);
     const [departurePlace, setDeparturePlace] = useState<string | undefined>(undefined);
+    const [googleIsDefined, setGoogleIsDefined] = useState<string | null>(() => {
+        if (typeof google !== 'undefined') {
+            return 'loaded';
+        }
+        return null;
+    });
     const searchDeparturePlaceFormSchema = yup.object().shape({origin: yup.string()});
     const {
         register,
@@ -79,8 +86,20 @@ const MapBuffet: React.FC = () => {
     }, [departurePlace]);
 
     useEffect(() => {
-        initialMap(departurePlace);
-    }, [ref, initialMap, departurePlace]);
+        const callback = () => {
+            if (typeof google !== 'undefined') {
+                setGoogleIsDefined('loaded')
+            }
+        }
+        window?.addEventListener('load', callback);
+        return () => window?.removeEventListener('load', callback);
+    });
+
+    useLayoutEffect(() => {
+        if (googleIsDefined !== null) {
+            initialMap(departurePlace);
+        }
+    }, [ref, initialMap, departurePlace, googleIsDefined]);
 
     return (
         <Box

@@ -27,7 +27,6 @@ const Modal: React.FC<ModalProps> = ({ header, children, footer, ...rest }) => {
             {header}
           </ModalHeader>
         )}
-
         <ModalCloseButton color="primary" />
         <ModalBody>{children}</ModalBody>
         {footer && <ModalFooter>{footer}</ModalFooter>}

@@ -155,7 +155,7 @@ const VaccineCard: React.FC<ModalFileProps> = ({
                         </Text>
                     ) : (
                         <Text mt={4} fontSize="md" fontWeight="medium" textAlign="center">
-                            {`Existe ${filesCurrent?.length} selecionados`}
+                            {`Existe ${filesCurrent?.length} arquivo selecionado`}
                         </Text>
                     )}
                 </>

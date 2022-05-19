@@ -13,10 +13,9 @@ controllerCreatedGuest
     .post(async (request: NextApiRequestModels, response: NextApiResponseModels) => {
     if (request.method === 'POST') {
         try {
-            const { email, presenceAtTheEvent, phone } = request.body;
-            const { files } = request;
+            const { name, phone } = request.body;
             const guestRepository = new GuestsRepository();
-            const guestService = new CreateGuestService(guestRepository, { email, presenceAtTheEvent, phone }, files);
+            const guestService = new CreateGuestService(guestRepository, { name, phone });
             const guestResponse = await guestService.execute();
             return response.status(guestResponse.code).json(guestResponse);
         } catch (error) {

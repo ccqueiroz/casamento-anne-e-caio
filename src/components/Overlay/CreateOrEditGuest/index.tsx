@@ -115,14 +115,16 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
         }
 
         if (inscriptionType === InscriptionType.edit) {
-            await actionService.subscribe(dataPost).then((res: HandleMessageResponse) => {
+            await actionDashboard.updateGuest(dataPost).then(async (res: HandleMessageResponse) => {
+                await actionDashboard.guestsList();
                 onCloseOverride();
                 toast.success('Convidado editado com sucesso!');
             }).catch(() => {
                 toast.error('Falha no envio das informações. Por favor, tente novamente!');
             }).finally(() => setLoadingRequest(false));
         } else {
-            await actionDashboard.createGuest(dataPost).then(() => {
+            await actionDashboard.createGuest(dataPost).then(async () => {
+                await actionDashboard.guestsList();
                 onCloseOverride();
                 toast.success('Convidado criado com sucesso!');
             })
@@ -130,7 +132,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
             .finally(() => setLoadingRequest(false))
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [filesData]);
+        }, [filesData, inscriptionType]);
     
     const renderSizeModal = useMemo(() => {
         if (width && width <= 480) {

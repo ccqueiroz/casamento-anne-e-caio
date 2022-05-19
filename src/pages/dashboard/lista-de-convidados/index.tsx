@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useState, useMemo} from 'react';
-import { Box, Button, Flex, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import { getSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import { SessionProps } from '../../../data/model/Session';

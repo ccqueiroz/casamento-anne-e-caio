@@ -11,6 +11,8 @@ import { TextComponent } from '../../../components/TextComponent';
 import { CreateOrEditGuest } from '../../../components/Overlay/CreateOrEditGuest';
 import { InscriptionType } from '../../../data/enums/InscriptionType';
 import { ModalStatisticGuests } from '../../../components/Overlay/ModalStatisticGuestes';
+import { MenuGuestsList } from '../../../components/MenuGuestsList';
+import { FilterGuestsList } from '../../../data/enums/FilterGuestsList';
 
 interface GuestListProps extends SessionProps<Array<GuestsModel>>{
     guestsList: Array<GuestsModel>
@@ -21,6 +23,7 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
     const { onOpen: onOpenModalStatisticGuests, onClose: onCloseModalStatisticGuests,...propsModalStatisticGuests } = useDisclosure();
     const [guest, setGuest] = useState<GuestsModel | undefined>(undefined);
     const [inscriptionType, setInscriptionType] = useState<InscriptionType | undefined>(undefined);
+    const [optionFilterGuests, setOptionFilterGuests] = useState<FilterGuestsList>(FilterGuestsList.allGuests);
 
     const onCloseModalCreateOrEditOverride = useCallback(() => {
         setGuest(undefined);
@@ -36,6 +39,22 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleChangeFilterGuestsList = useCallback((value: string | Array<string>) => {
+        setOptionFilterGuests(value as FilterGuestsList);
+    }, []);
+
+    const guestsFiltered = useMemo(() => {
+        if (optionFilterGuests === FilterGuestsList.allGuests) {
+            return guestsList;
+        } else if (optionFilterGuests === FilterGuestsList.guestsConfirmed) {
+            return guestsList?.filter((guest) => guest?.presenceAtTheEvent === 'Y');
+        } else if (optionFilterGuests === FilterGuestsList.guestsNotConfirmed) {
+            return guestsList?.filter((guest) => guest?.presenceAtTheEvent === 'N');
+        } else {
+            guestsList?.filter((guest) => !guest?.presenceAtTheEvent);
+        }
+    }, [optionFilterGuests, guestsList]);
+
     return (
         <Dashboard user={user}>
             <Box width="100%" height="100%" id="content-guest-list" overflow="hidden">
@@ -49,64 +68,29 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
                     <Box
                         width="100%"
                         maxWidth="1400px"
-                        height={{ base: '7rem', md: '3rem'}}
+                        height="3rem"
                         margin="1.25rem auto 0"
                         padding="0 10px"
                     >
-                        <Box height="100%" display="flex" alignItems={{base: 'center', md: "flex-end"}} flexDirection={{base: 'column-reverse', md: 'row'}}>
+                        <Box width="100%" height="100%" display="flex" alignItems="flex-end" >
                             <TextComponent text={`${guestsList?.length} convidados`} textIndent={0} textAlign="left" fontSize="1rem" color="text.secondary" />
+                            {optionFilterGuests !== FilterGuestsList.allGuests && (
+                                    <>
+                                        <TextComponent text=" | " textIndent={0} textAlign="center" fontSize="1rem" color="text.secondary" margin="0 10px" />       
+                                        <TextComponent text={`${guestsFiltered?.length} ${optionFilterGuests}`} textIndent={0} textAlign="left" fontSize="1rem" color="text.secondary" />
+                                    </>
+                                )
+                            }
                             <Flex
                                 alignItems="center"
-                                margin="0 auto"
                                 flex={1}
                                 justifyContent="flex-end"
-                                flexDirection={{base: 'column', md: 'row'}}
                             >
-                                <Button
-                                    width="auto"
-                                    height="30px"
-                                    marginBottom="8px"
-                                    marginRight="1rem"
-                                    padding={{base: "3% 15%", md: "1%"}}
-                                    fontWeight="bold"
-                                    letterSpacing="0.1rem"
-                                    color="#0c6a6b"
-                                    fontSize={{ base: "0.725rem", md: "0.8rem" }}
-                                    background="linear-gradient(45deg, #aadae9, #d6eef5)"
-                                    transition="background 300ms easy-in-out"
-                                    boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
-                                    title="Ver gráfico com as estatísticas da Lista de Convidados"
-                                    aria-describedby="Ver gráfico com as estatísticas da Lista de Convidados"
-                                    aria-labelledby="Ver gráfico com as estatísticas da Lista de Convidados"
-                                    onClick={() => onOpenModalStatisticGuests()}
-                                    _hover={{
-                                        backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
-                                    }}
-                                >
-                                    Estatísticas             
-                                </Button>
-                                <Button
-                                    width="auto"
-                                    height="30px"
-                                    marginBottom="8px"
-                                    padding={{base: "3% 15%", md: "1%"}}
-                                    fontWeight="bold"
-                                    letterSpacing="0.1rem"
-                                    color="#0c6a6b"
-                                    fontSize={{ base: "0.725rem", md: "0.8rem" }}
-                                    background="linear-gradient(45deg, #aadae9, #d6eef5)"
-                                    transition="background 300ms easy-in-out"
-                                    boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
-                                    title="Adicionar um novo convidado"
-                                    aria-describedby="Adicionar um novo convidado"
-                                    aria-labelledby="Adicionar um novo convidado"
-                                    onClick={() => onOpenModalCreateOrEditOverride(InscriptionType.new, undefined)}
-                                    _hover={{
-                                        backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"
-                                    }}
-                                >
-                                    Adicionar Convidado             
-                                </Button>
+                                <MenuGuestsList
+                                    openModalCreateOrEdit={onOpenModalCreateOrEditOverride}
+                                    openModalStatisticGuests={onOpenModalStatisticGuests}
+                                    handleChangeFilterGuestsList={handleChangeFilterGuestsList}
+                                />
                             </Flex>
                             
                         </Box>
@@ -129,7 +113,7 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
                             overflowX="hidden"
                         >
                             {
-                                guestsList?.map((guest: GuestsModel) => (
+                                guestsFiltered?.map((guest: GuestsModel) => (
                                     <GuestInfoDetails key={guest?.phone} guest={guest} onOpen={onOpenModalCreateOrEditOverride}/>
                                 ))
                             }

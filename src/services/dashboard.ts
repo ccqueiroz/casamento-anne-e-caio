@@ -1,11 +1,12 @@
 import { HandleMessageResponse } from "../data/model/Api/HandleMessageModel";
+import { GuestsModel } from "../data/model/Guests";
 import { api } from "../lib/clients/api";
 
 
 const API_PATH = '/dashboard';
 
 const guestsList = async () => {
-    const { data } = await api.get<HandleMessageResponse>(`${API_PATH}/guest-list`);
+    const { data } = await api.get<HandleMessageResponse<Array<GuestsModel>>>(`${API_PATH}/guest-list`);
     return data;
 }
 

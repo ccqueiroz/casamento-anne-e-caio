@@ -14,7 +14,13 @@ const createGuest = async (body: FormData) => {
     return data;
 }
 
+const updateGuest = async (body: FormData) => {
+    const { data } = await api.put<HandleMessageResponse>(`${API_PATH}/update-guest`, body);
+    return data;
+}
+
 export const actionDashboard = {
     guestsList,
-    createGuest
+    createGuest,
+    updateGuest
 };

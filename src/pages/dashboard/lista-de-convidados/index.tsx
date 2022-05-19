@@ -75,9 +75,9 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
                                     background="linear-gradient(45deg, #aadae9, #d6eef5)"
                                     transition="background 300ms easy-in-out"
                                     boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
-                                    title="Adicionar um novo convidado"
-                                    aria-describedby="Adicionar um novo convidado"
-                                    aria-labelledby="Adicionar um novo convidado"
+                                    title="Ver gráfico com as estatísticas da Lista de Convidados"
+                                    aria-describedby="Ver gráfico com as estatísticas da Lista de Convidados"
+                                    aria-labelledby="Ver gráfico com as estatísticas da Lista de Convidados"
                                     onClick={() => onOpenModalStatisticGuests()}
                                     _hover={{
                                         backgroundImage: "linear-gradient(45deg, #93c2c2, #93c2c2, #aadae9, #d6eef5, #93c2c2)"

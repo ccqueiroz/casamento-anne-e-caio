@@ -13,7 +13,7 @@ controllGuestList
             try {
                 const guestRepository = new GuestsRepository();
                 const guestsService = await (new GetGuestsService(guestRepository).execute());
-                return response.status(guestsService?.code).json(guestsService?.guest);
+                return response.status(guestsService?.code).json(guestsService);
             } catch (error) {
                 const err = handleErrors(error);
                 console.error(err)

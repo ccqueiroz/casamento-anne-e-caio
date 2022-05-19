@@ -1,9 +1,8 @@
-import React, {memo, useCallback, useState, useMemo} from 'react';
+import React, { memo, useCallback, useState, useMemo } from 'react';
 import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import { getSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import { SessionProps } from '../../../data/model/Session';
-import { actionDashboard } from '../../../services/dashboard';
 import { GuestsModel } from '../../../data/model/Guests';
 import GuestInfoDetails from '../../../components/GuestInfoDetails';
 import Dashboard from '../Layout';
@@ -13,18 +12,24 @@ import { InscriptionType } from '../../../data/enums/InscriptionType';
 import { ModalStatisticGuests } from '../../../components/Overlay/ModalStatisticGuestes';
 import { MenuGuestsList } from '../../../components/MenuGuestsList';
 import { FilterGuestsList } from '../../../data/enums/FilterGuestsList';
+import { useGetGuestsList } from '../../../hooks/useGetGuestsList';
+import Loader from '../../../components/Loader';
 
-interface GuestListProps extends SessionProps<Array<GuestsModel>>{
-    guestsList: Array<GuestsModel>
-}
+interface GuestListProps extends SessionProps<Array<GuestsModel>>{}
 
-const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
+const GuestList: React.FC<GuestListProps> = ({ user }) => {
     const { onOpen: onOpenModalCreateOrEdit, onClose: onCloseModalCreateOrEdit,...propsModalCreateOrEdit } = useDisclosure();
     const { onOpen: onOpenModalStatisticGuests, onClose: onCloseModalStatisticGuests,...propsModalStatisticGuests } = useDisclosure();
     const [guest, setGuest] = useState<GuestsModel | undefined>(undefined);
     const [inscriptionType, setInscriptionType] = useState<InscriptionType | undefined>(undefined);
     const [optionFilterGuests, setOptionFilterGuests] = useState<FilterGuestsList>(FilterGuestsList.allGuests);
-
+    const {
+        guestsList,
+        error,
+        isLoading,
+        isFetching,
+        refetch
+     } = useGetGuestsList();
     const onCloseModalCreateOrEditOverride = useCallback(() => {
         setGuest(undefined);
         setInscriptionType(undefined);
@@ -73,11 +78,40 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
                         padding="0 10px"
                     >
                         <Box width="100%" height="100%" display="flex" alignItems="flex-end" >
-                            <TextComponent text={`${guestsList?.length} convidados`} textIndent={0} textAlign="left" fontSize="1rem" color="text.secondary" />
-                            {optionFilterGuests !== FilterGuestsList.allGuests && (
+                            {
+                                !isLoading
+                                && !error
+                                && !isFetching
+                                && guestsList
+                                && (
                                     <>
-                                        <TextComponent text=" | " textIndent={0} textAlign="center" fontSize="1rem" color="text.secondary" margin="0 10px" />       
-                                        <TextComponent text={`${guestsFiltered?.length} ${optionFilterGuests}`} textIndent={0} textAlign="left" fontSize="1rem" color="text.secondary" />
+                                        <TextComponent
+                                            text={`${guestsList?.length} convidados`}
+                                            textIndent={0}
+                                            textAlign="left"
+                                            fontSize="1rem"
+                                            color="text.secondary"
+                                        />
+                                        {optionFilterGuests !== FilterGuestsList.allGuests && (
+                                            <>
+                                                <TextComponent
+                                                    text=" | "
+                                                    textIndent={0}
+                                                    textAlign="center"
+                                                    fontSize="1rem"
+                                                    color="text.secondary"
+                                                    margin="0 10px"
+                                                />
+                                                <TextComponent
+                                                    text={`${guestsFiltered?.length} ${optionFilterGuests}`}
+                                                    textIndent={0}
+                                                    textAlign="left"
+                                                    fontSize="1rem"
+                                                    color="text.secondary"
+                                                />
+                                            </>
+                                            )
+                                        }
                                     </>
                                 )
                             }
@@ -105,19 +139,27 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
                         borderRadius="12px"
                         overflow="hidden"
                     >
-                        <Box
-                            width="100%"
-                            height="100%"
-                            background="#edf8fb"
-                            overflowY="auto"
-                            overflowX="hidden"
-                        >
-                            {
-                                guestsFiltered?.map((guest: GuestsModel) => (
-                                    <GuestInfoDetails key={guest?.phone} guest={guest} onOpen={onOpenModalCreateOrEditOverride}/>
-                                ))
-                            }
-                        </Box>
+                        {
+                            isLoading && !error && !guestsFiltered && !guestsList ?
+                                (
+                                    <Loader /> 
+                                )
+                                : (
+                                    <Box
+                                        width="100%"
+                                        height="100%"
+                                        background="#edf8fb"
+                                        overflowY="auto"
+                                        overflowX="hidden"
+                                    >
+                                        {
+                                            guestsFiltered?.map((guest: GuestsModel) => (
+                                                <GuestInfoDetails key={guest?.phone} guest={guest} onOpen={onOpenModalCreateOrEditOverride}/>
+                                            ))
+                                        }
+                                    </Box>
+                                )
+                        }
                     </Box>
 
                 </Box>
@@ -129,6 +171,7 @@ const GuestList: React.FC<GuestListProps> = ({user, guestsList }) => {
                 <CreateOrEditGuest
                     inscriptionType={inscriptionType as InscriptionType}
                     onClose={onCloseModalCreateOrEditOverride}
+                    handleRefetch={refetch}
                     guest={guest}
                     {...propsModalCreateOrEdit}
                 />
@@ -149,11 +192,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
             }
         };
     }
-    const guestsList = await actionDashboard.guestsList();
     return {
         props: {
             ...session,
-            guestsList
         }
     }
 }

@@ -59,15 +59,15 @@ const Input = forwardRef<InputProps, 'input'>(
                   IconType ? <IconType fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" {...iconTypeProps}/> : null
                 }
               </InputLeftElement>
-            ): (
-              <InputLeftElement mt={"1%"} ml="5px">
-                {
-                  type === 'phone' ?
-                    (<FaWhatsapp fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
-                    : type === 'email' ? (<AiOutlineMail fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
-                      : null
-                }
-              </InputLeftElement> 
+            ) : (
+                <InputLeftElement mt={"1%"} ml="5px" display={type === "text" ? "none" : "flex"}>
+                  {
+                    type === 'phone' ?
+                      (<FaWhatsapp fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
+                      : type === 'email' ? (<AiOutlineMail fontSize={(width || 1000) <= 500 ? 18 : 25} color="#a0aec0" />)
+                        : null
+                  }
+                </InputLeftElement> 
             )
           }
           <ChakraInput
@@ -76,7 +76,7 @@ const Input = forwardRef<InputProps, 'input'>(
             background="primaryColor.500"
             border="1px solid text.secondary"
             ref={ref}
-            paddingLeft="2.9rem"
+            paddingLeft={type === "text" ? "16px" : "2.9rem"}
             color="text.tertiary"
             boxShadow="1px 2px 9px 2px rgba(74, 97, 97, 0.5)"
             fontSize={{ base: "0.75rem", md: "1rem", lg:"1.125rem" }}

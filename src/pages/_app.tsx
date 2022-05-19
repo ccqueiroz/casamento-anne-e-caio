@@ -1,4 +1,7 @@
 import {AppProps} from 'next/app';
+import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { queryClient } from '../lib/clients/query';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import '../../styles/globals.css';
 import { colors } from '../../styles/themeChakra';
@@ -31,10 +34,13 @@ function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps) {
 
     return (
         <SessionProvider session={session}>
-            <ChakraProvider theme={theme}>
-                <Component {...pageProps} />
-                <Toaster position="bottom-right" />
-            </ChakraProvider>
+            <QueryClientProvider client={queryClient}>
+                <ChakraProvider theme={theme}>
+                    <Component {...pageProps} />
+                    <Toaster position="bottom-right" />
+                    <ReactQueryDevtools position="top-right" />
+                </ChakraProvider>    
+            </QueryClientProvider>
         </SessionProvider>
 
   );

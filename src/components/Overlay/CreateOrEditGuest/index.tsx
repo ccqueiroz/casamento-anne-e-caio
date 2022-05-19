@@ -29,6 +29,7 @@ import toast from 'react-hot-toast';
 import { HandleMessageResponse } from '../../../data/model/Api/HandleMessageModel';
 import { actionService } from '../../../services/subscribe';
 import { useWindowSize } from '../../../hooks/useWindowSize';
+import { actionDashboard } from '../../../services/dashboard';
 
 export interface ModalCreateOrEditGuestProps extends Omit<ChakraModalProps, 'children'> {
     guest?: GuestsModel | undefined
@@ -115,12 +116,18 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
 
         if (inscriptionType === InscriptionType.edit) {
             await actionService.subscribe(dataPost).then((res: HandleMessageResponse) => {
+                onCloseOverride();
                 toast.success('Convidado editado com sucesso!');
-            }).catch((err) => {
+            }).catch(() => {
                 toast.error('Falha no envio das informações. Por favor, tente novamente!');
             }).finally(() => setLoadingRequest(false));
         } else {
-            //post
+            await actionDashboard.createGuest(dataPost).then(() => {
+                onCloseOverride();
+                toast.success('Convidado criado com sucesso!');
+            })
+            .catch(() => toast.error('Falha no envio das informações. Por favor, tente novamente!'))
+            .finally(() => setLoadingRequest(false))
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [filesData]);

@@ -9,6 +9,12 @@ const guestsList = async () => {
     return data;
 }
 
+const createGuest = async (body: FormData) => {
+    const { data } = await api.post<HandleMessageResponse>(`${API_PATH}/create-guest`, body);
+    return data;
+}
+
 export const actionDashboard = {
-    guestsList
+    guestsList,
+    createGuest
 };

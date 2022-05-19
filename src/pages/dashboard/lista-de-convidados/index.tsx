@@ -14,12 +14,14 @@ import { MenuGuestsList } from '../../../components/MenuGuestsList';
 import { FilterGuestsList } from '../../../data/enums/FilterGuestsList';
 import { useGetGuestsList } from '../../../hooks/useGetGuestsList';
 import Loader from '../../../components/Loader';
+import { ModalDeleteGuest } from '../../../components/Overlay/DeleteGuest';
 
 interface GuestListProps extends SessionProps<Array<GuestsModel>>{}
 
 const GuestList: React.FC<GuestListProps> = ({ user }) => {
     const { onOpen: onOpenModalCreateOrEdit, onClose: onCloseModalCreateOrEdit,...propsModalCreateOrEdit } = useDisclosure();
     const { onOpen: onOpenModalStatisticGuests, onClose: onCloseModalStatisticGuests,...propsModalStatisticGuests } = useDisclosure();
+    const { onOpen: onOpenModalDeleteGuests, onClose: onCloseModalDeleteGuests,...propsModalDeleteGuests } = useDisclosure();
     const [guest, setGuest] = useState<GuestsModel | undefined>(undefined);
     const [inscriptionType, setInscriptionType] = useState<InscriptionType | undefined>(undefined);
     const [optionFilterGuests, setOptionFilterGuests] = useState<FilterGuestsList>(FilterGuestsList.allGuests);
@@ -44,6 +46,12 @@ const GuestList: React.FC<GuestListProps> = ({ user }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const onOpenModalDeleteOverride = useCallback((guest: GuestsModel | undefined) => {
+        setGuest(guest);
+        onOpenModalDeleteGuests();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const handleChangeFilterGuestsList = useCallback((value: string | Array<string>) => {
         setOptionFilterGuests(value as FilterGuestsList);
     }, []);
@@ -52,11 +60,11 @@ const GuestList: React.FC<GuestListProps> = ({ user }) => {
         if (optionFilterGuests === FilterGuestsList.allGuests) {
             return guestsList;
         } else if (optionFilterGuests === FilterGuestsList.guestsConfirmed) {
-            return guestsList?.filter((guest) => guest?.presenceAtTheEvent === 'Y');
+            return guestsList?.filter((guest: GuestsModel) => guest?.presenceAtTheEvent === 'Y');
         } else if (optionFilterGuests === FilterGuestsList.guestsNotConfirmed) {
-            return guestsList?.filter((guest) => guest?.presenceAtTheEvent === 'N');
+            return guestsList?.filter((guest: GuestsModel) => guest?.presenceAtTheEvent === 'N');
         } else {
-            return guestsList?.filter((guest) => !guest?.presenceAtTheEvent);
+            return guestsList?.filter((guest: GuestsModel) => !guest?.presenceAtTheEvent);
         }
     }, [optionFilterGuests, guestsList]);
 
@@ -154,7 +162,12 @@ const GuestList: React.FC<GuestListProps> = ({ user }) => {
                                     >
                                         {
                                             guestsFiltered?.map((guest: GuestsModel) => (
-                                                <GuestInfoDetails key={guest?.phone} guest={guest} onOpen={onOpenModalCreateOrEditOverride}/>
+                                                <GuestInfoDetails
+                                                    key={guest?.phone}
+                                                    guest={guest}
+                                                    onOpenModalCreateOrEdit={onOpenModalCreateOrEditOverride}
+                                                    onOpenModalDelete={onOpenModalDeleteOverride}
+                                                />
                                             ))
                                         }
                                     </Box>
@@ -174,6 +187,12 @@ const GuestList: React.FC<GuestListProps> = ({ user }) => {
                     handleRefetch={refetch}
                     guest={guest}
                     {...propsModalCreateOrEdit}
+                />
+                <ModalDeleteGuest
+                    onClose={onCloseModalDeleteGuests}
+                    handleRefetch={refetch}
+                    guest={guest}
+                    {...propsModalDeleteGuests}
                 />
             </Box>
         </Dashboard>

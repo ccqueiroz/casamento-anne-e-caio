@@ -65,6 +65,17 @@ class GuestsRepository {
         
         return guest;
     }
+
+    //delete
+    public async queryDeleteGuest(phone: string) {
+        const guest = await fauna.query<ReturnFaunaDBInEXPR<GuestsModel>>(
+            q.Delete(
+                q.Select('ref', q.Get(q.Match(q.Index('guests_by_phone'), phone)))
+            )
+        ).then((res: ReturnFaunaDBInEXPR<GuestsModel>) => res).catch(err => err);
+        
+        return guest;
+    }
 }
 
 export { GuestsRepository };

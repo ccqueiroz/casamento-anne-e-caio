@@ -20,8 +20,15 @@ const updateGuest = async (body: FormData) => {
     return data;
 }
 
+const deleteGuest = async (guest: GuestsModel) => {
+    await api.delete<HandleMessageResponse>(`${API_PATH}/delete-guest`, {
+        params: {phone: guest.phone}
+    });
+}
+
 export const actionDashboard = {
     guestsList,
     createGuest,
-    updateGuest
+    updateGuest,
+    deleteGuest
 };

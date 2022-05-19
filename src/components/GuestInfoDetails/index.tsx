@@ -9,10 +9,11 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { InscriptionType } from '../../data/enums/InscriptionType';
 interface GuestInfoDetailsProps {
     guest: GuestsModel | undefined
-    onOpen: (inscriptionType: InscriptionType, guest: GuestsModel | undefined) => void
+    onOpenModalCreateOrEdit: (inscriptionType: InscriptionType, guest: GuestsModel | undefined) => void
+    onOpenModalDelete: (guest: GuestsModel | undefined) => void
 }
 
-const GuestInfoDetails: React.FC<GuestInfoDetailsProps> = ({guest, onOpen}) => {
+const GuestInfoDetails: React.FC<GuestInfoDetailsProps> = ({guest, onOpenModalCreateOrEdit, onOpenModalDelete}) => {
 
     return (
         <>
@@ -67,7 +68,7 @@ const GuestInfoDetails: React.FC<GuestInfoDetailsProps> = ({guest, onOpen}) => {
                 <Flex width="10rem" alignItems="flex-end" justifyContent="space-around" padding="0 2rem">
                     <Icon
                         as={BiEdit}
-                        onClick={() => onOpen(InscriptionType.edit, guest)}
+                        onClick={() => onOpenModalCreateOrEdit(InscriptionType.edit, guest)}
                         cursor="pointer"
                         ml="0.5rem"
                         mb="0.4rem"
@@ -81,6 +82,7 @@ const GuestInfoDetails: React.FC<GuestInfoDetailsProps> = ({guest, onOpen}) => {
                     />
                     <Icon
                         as={RiDeleteBin6Line}
+                        onClick={() => onOpenModalDelete(guest)}
                         cursor="pointer"
                         ml="0.5rem"
                         mb="0.4rem"

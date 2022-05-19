@@ -1,8 +1,6 @@
 import { GuestsModel } from '../../data/model/Guests';
 import AppError from '../errors/typeErrors/AppError';
 import { GuestsRepository } from '../repositories/guestsRepository';
-import UploadFileService from './UploadFileService';
-import { Files } from "formidable";
 import { HandleMessageResponse } from '../../data/model/Api/HandleMessageModel';
 import { handleErrors } from '../errors/handleErrors';
 

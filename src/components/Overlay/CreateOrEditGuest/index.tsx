@@ -35,12 +35,14 @@ export interface ModalCreateOrEditGuestProps extends Omit<ChakraModalProps, 'chi
     guest?: GuestsModel | undefined
     onClose: () => void
     inscriptionType: InscriptionType
+    handleRefetch: () => void
 }
 
 const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
     onClose,
     guest,
     inscriptionType,
+    handleRefetch,
   ...rest
 }) => {
     const { width } = useWindowSize();
@@ -116,7 +118,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
 
         if (inscriptionType === InscriptionType.edit) {
             await actionDashboard.updateGuest(dataPost).then(async (res: HandleMessageResponse) => {
-                await actionDashboard.guestsList();
+                handleRefetch();
                 onCloseOverride();
                 toast.success('Convidado editado com sucesso!');
             }).catch(() => {

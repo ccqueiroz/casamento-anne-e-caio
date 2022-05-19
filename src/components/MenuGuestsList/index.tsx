@@ -16,6 +16,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { FilterGuestsList } from '../../data/enums/FilterGuestsList';
 import { GuestsModel } from '../../data/model/Guests';
 import { InscriptionType } from '../../data/enums/InscriptionType';
+import { RiUserAddLine } from 'react-icons/ri';
+import { RiLineChartFill } from 'react-icons/ri';
 
 interface MenuGuestsListProps extends Omit<MenuProps, 'children'>{
     openModalCreateOrEdit: (inscriptionType: InscriptionType, guest: GuestsModel | undefined) => void
@@ -75,7 +77,10 @@ const MenuGuestsList: React.FC<MenuGuestsListProps> = ({
                         aria-labelledby="Ver gráfico com as estatísticas da Lista de Convidados"
                         onClick={openModalStatisticGuests}
                     >
-                        Ver Estatísticas
+                        <Flex width="100%" gap={3} alignItems="center">
+                            <Icon as={RiLineChartFill} color="#0c6a6b"width="1.25rem" height="1.25rem"/>
+                            Ver Estatísticas
+                        </Flex>
                     </MenuItem>
                     <MenuItem
                         padding="0.4rem 2.2rem"
@@ -84,7 +89,10 @@ const MenuGuestsList: React.FC<MenuGuestsListProps> = ({
                         aria-labelledby="Adicionar um novo convidado"
                         onClick={() => openModalCreateOrEdit(InscriptionType.new, undefined)}
                     >
-                        Adicionar um novo convidado
+                        <Flex width="100%" gap={3} alignItems="center" >
+                            <Icon as={RiUserAddLine} color="#0c6a6b" width="1.25rem" height="1.25rem"/>
+                            Adicionar um novo convidado
+                        </Flex>
                     </MenuItem>
                 </MenuOptionGroup>
             </MenuList>

@@ -13,10 +13,10 @@ controllerUpdateGuest
     .put(async (request: NextApiRequestModels, response: NextApiResponseModels) => {
     if (request.method === 'PUT') {
         try {
-            const { email, presenceAtTheEvent, phone } = request.body;
+            const { name, email, presenceAtTheEvent, phone } = request.body;
             const { files } = request;
             const guestRepository = new GuestsRepository();
-            const guestService = new UpdateGuestService(guestRepository, { email, presenceAtTheEvent, phone }, files);
+            const guestService = new UpdateGuestService(guestRepository, { name, email, presenceAtTheEvent, phone }, files);
             const guestResponse = await guestService.execute();
             return response.status(guestResponse.code).json(guestResponse);
         } catch (error) {

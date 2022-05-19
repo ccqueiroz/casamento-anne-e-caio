@@ -10,7 +10,6 @@ class CreateGuestService {
     constructor(
         private guestsRepository: GuestsRepository,
         private guest: GuestsModel,
-        private file: Files
     ) { }
     
     private handleMessage(message: string, guest: GuestsModel, code: number): HandleMessageResponse {
@@ -27,12 +26,6 @@ class CreateGuestService {
             if (guest.data) {
                 throw new AppError("Convidado já possui registro", 404);
             };
-            const fileName = Object.keys(this.file).toString();
-            if (Object.keys(this.file).length > 0) {
-                const uploadFileService = new UploadFileService(this.file, fileName);
-                const path = await uploadFileService.execute();
-                this.guest.urlVaccineCard = path;
-            }
             const createdGuest = await this.guestsRepository.queryCreateGuest(this.guest);
             if (!createdGuest.data) {
                 throw new AppError("Falha ao atualizar informações do convidado.", 500);

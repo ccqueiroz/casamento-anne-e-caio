@@ -56,7 +56,7 @@ const GuestList: React.FC<GuestListProps> = ({ user }) => {
         } else if (optionFilterGuests === FilterGuestsList.guestsNotConfirmed) {
             return guestsList?.filter((guest) => guest?.presenceAtTheEvent === 'N');
         } else {
-            guestsList?.filter((guest) => !guest?.presenceAtTheEvent);
+            return guestsList?.filter((guest) => !guest?.presenceAtTheEvent);
         }
     }, [optionFilterGuests, guestsList]);
 

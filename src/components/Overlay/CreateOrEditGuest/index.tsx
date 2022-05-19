@@ -30,6 +30,7 @@ import { HandleMessageResponse } from '../../../data/model/Api/HandleMessageMode
 import { actionService } from '../../../services/subscribe';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { actionDashboard } from '../../../services/dashboard';
+import { convertFirstLetterEachWorldToUppercase } from '../../../data/utils/convertFirstLetterEachWorldToUppercase';
 
 export interface ModalCreateOrEditGuestProps extends Omit<ChakraModalProps, 'children'> {
     guest?: GuestsModel | undefined
@@ -52,12 +53,23 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
     const { onOpen: onOpenVaccineCard, ...propsModalVaccineCard } = useDisclosure();
 
     const signUpFormSchema = yup.object().shape({
+        name: yup
+            .string()
+            .required("Por favor, informe o nome do convidado"),
         phone: yup
             .string()
             .test('phone', 'Informe um número de telefone válido', (phone: string | undefined) => isPhone(phone || ''))
             .required("Por favor, informe seu telefone (whatsapp)"),
         email: yup.string().email("E-mail inválido. Por favor, informe um e-mail válido"),
-        presenceAtTheEvent: yup.string().required('Por favor, informe se você poderá comparecer ao evento.'),
+        presenceAtTheEvent: yup
+            .string()
+            .test('presenceAtTheEvent', 'Por favor, informe se o convidado irá comparecer ao evento.', (presenceAtTheEvent: string | undefined) => {
+                if (inscriptionType === InscriptionType.edit) {
+                    return !!presenceAtTheEvent
+                }
+                return true
+            })
+            .nullable(),
     })
     const {
         register,
@@ -71,7 +83,8 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
     } = useForm<GuestsModel>({
         resolver: yupResolver<yup.AnyObjectSchema>(signUpFormSchema),
     });
-        const handleOnChangeRadioGroup = useCallback((event: string): void => {
+
+    const handleOnChangeRadioGroup = useCallback((event: string): void => {
         setValue('presenceAtTheEvent', event);
         clearErrors(['presenceAtTheEvent']);
         setFilesData([]);
@@ -80,6 +93,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
 
     const resetData = useCallback(() => {
         setFilesData([]);
+        setValue('name', '');
         setValue('email', '');
         setValue('phone', '');
         setValue('presenceAtTheEvent', '');
@@ -89,6 +103,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
     const onCloseOverride = useCallback(() => {
         resetData();
         onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const deleteAttachment = useCallback((fileName: string) => {
@@ -101,10 +116,13 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
         }
     }, [filesData]);
 
-        const submit: SubmitHandler<GuestsModel> = useCallback(async (data) => {
+    const submit: SubmitHandler<GuestsModel> = useCallback(async (data) => {
         setLoadingRequest(true);
 
         const dataPost = new FormData();
+        if (data?.name) {
+            dataPost.append('name', data?.name);
+        }
         if (data?.email) {
             dataPost.append('email', data?.email);
         }
@@ -126,7 +144,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
             }).finally(() => setLoadingRequest(false));
         } else {
             await actionDashboard.createGuest(dataPost).then(async () => {
-                await actionDashboard.guestsList();
+                handleRefetch();
                 onCloseOverride();
                 toast.success('Convidado criado com sucesso!');
             })
@@ -134,7 +152,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
             .finally(() => setLoadingRequest(false))
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [filesData, inscriptionType]);
+    }, [filesData, inscriptionType]);
     
     const renderSizeModal = useMemo(() => {
         if (width && width <= 480) {
@@ -143,6 +161,11 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
             return '2xl';
         }
     }, [width]);
+
+    const handleFormatName = useCallback((event: ChangeEvent<HTMLInputElement>, onChange: (...event: any[]) => void) => {
+        const name = convertFirstLetterEachWorldToUppercase(event?.target?.value);
+        onChange(name);
+    }, [])
     
     useEffect(() => {
         reset(guest);
@@ -151,6 +174,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [guest, InscriptionType]);
+
     return (
         <Modal
             size={renderSizeModal}
@@ -176,7 +200,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
                 margin={{
                     base: "0rem auto 0.5rem",
                     md: "0.5rem auto 0.5rem",
-                    lg: "1rem auto 0.5rem"
+                    lg: "0rem auto 0.5rem"
                 }}
                 as="form"
                 onSubmit={handleSubmit(submit)}
@@ -187,18 +211,42 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
                     height="auto"
                     margin="0 auto"
                 >
-                    <GridItem mb="2.5rem">
-                        <Input
-                        id="email"
-                        label={"E-mail"}
-                        type="email"
-                        placeholder="Digite seu e-mail"
-                        error={errors.email}
-                        height="3rem"
-                        {...register('email')}
+                    <GridItem mb="2rem">
+
+                        <Controller
+                            control={control}
+                            name="name"
+                            render={({ field: { onChange, value } }) => (
+                                <Input
+                                    id="name"
+                                    label={"Nome"}
+                                    type="text"
+                                    IconType={undefined}
+                                    placeholder="Digite o nome do convidado"
+                                    error={errors.name}
+                                    height="3rem"
+                                    value={value}
+                                    onChange={(event: ChangeEvent<HTMLInputElement>) => handleFormatName(event, onChange)}
+                                />
+                            )}
                         />
                     </GridItem>
-                    <GridItem mb="2.5rem">
+                    {
+                        inscriptionType === InscriptionType.edit && (
+                            <GridItem mb="2rem">
+                                <Input
+                                id="email"
+                                label={"E-mail"}
+                                type="email"
+                                placeholder="Digite seu e-mail"
+                                error={errors.email}
+                                height="3rem"
+                                {...register('email')}
+                                />
+                            </GridItem>
+                        )
+                    }
+                    <GridItem mb="2rem">
                         <Controller
                             control={control}
                             name="phone"
@@ -223,74 +271,80 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
                             )}
                         />
                     </GridItem>
-                    <GridItem mb="1rem">
-                        <FormControl
-                            isInvalid={!!errors.presenceAtTheEvent}
-                            isRequired
-                        >
-                            <FormLabel mb="1rem">
-                                <Text
-                                    as="label"
-                                    fontWeight="bold"
-                                    letterSpacing="0.2rem"
-                                    color="text.tertiary"
-                                    fontSize={{base:"1rem", md:"1.25rem"}}
-                                >
-                                    Você irá comparecer ao evento?
-                                </Text>
-                            </FormLabel>
-                            <RadioGroup
-                                value={getValues('presenceAtTheEvent')}
-                                onChange={handleOnChangeRadioGroup}
-                            >
-                                <Radio
-                                    value="Y"
-                                    pb={3}
-                                    {...register('presenceAtTheEvent')}
-
-                                >
-                                    <Text
-                                        colorScheme="text.secondary"
-                                        letterSpacing="0.2rem"
-                                        color="text.tertiary"
-                                        fontSize={{base:"1rem", md:"1.25rem"}}
-                                    >
-                                        Sim
-                                    </Text>
-                                </Radio>
-                                <Radio
-                                    value="N"
-                                    ml="5rem"
-                                    pb={3}
-                                    {...register('presenceAtTheEvent')}
-                                >
-                                    <Text
-                                        colorScheme="text.secondary"
-                                        letterSpacing="0.2rem"
-                                        color="text.tertiary"
-                                        fontSize={{base:"1rem", md:"1.25rem"}}
-                                    >
-                                        Não
-                                    </Text>
-                                </Radio>
-                            </RadioGroup>
-                            {!!errors.presenceAtTheEvent && (
-                                <FormErrorMessage>
-                                    {errors.presenceAtTheEvent?.message}
-                                </FormErrorMessage>
-                            )}
-                        </FormControl>
-                    </GridItem>
                     {
-                        getValues('presenceAtTheEvent') === 'Y' && (
-                            <GridItem >
-                                <InputUpload
-                                    openModal={onOpenVaccineCard}
-                                    filesData={filesData}
-                                    deleteAttachment={deleteAttachment}
-                                    urlFile={urlFile}
-                                />
-                            </GridItem>
+                        inscriptionType === InscriptionType.edit && (
+                            <>
+                                <GridItem mb="1rem">
+                                    <FormControl
+                                        isInvalid={!!errors.presenceAtTheEvent}
+                                        isRequired={inscriptionType === InscriptionType.edit}
+                                        >
+                                        <FormLabel mb="1rem">
+                                            <Text
+                                                as="label"
+                                                fontWeight="bold"
+                                                letterSpacing="0.2rem"
+                                                color="text.tertiary"
+                                                fontSize={{base:"1rem", md:"1.25rem"}}
+                                                >
+                                                Você irá comparecer ao evento?
+                                            </Text>
+                                        </FormLabel>
+                                        <RadioGroup
+                                            value={getValues('presenceAtTheEvent')}
+                                            onChange={handleOnChangeRadioGroup}
+                                        >
+                                            <Radio
+                                                value="Y"
+                                                pb={3}
+                                                {...register('presenceAtTheEvent')}
+
+                                                >
+                                                <Text
+                                                    colorScheme="text.secondary"
+                                                    letterSpacing="0.2rem"
+                                                    color="text.tertiary"
+                                                    fontSize={{base:"1rem", md:"1.25rem"}}
+                                                    >
+                                                    Sim
+                                                </Text>
+                                            </Radio>
+                                            <Radio
+                                                value="N"
+                                                ml="5rem"
+                                                pb={3}
+                                                {...register('presenceAtTheEvent')}
+                                                >
+                                                <Text
+                                                    colorScheme="text.secondary"
+                                                    letterSpacing="0.2rem"
+                                                    color="text.tertiary"
+                                                    fontSize={{base:"1rem", md:"1.25rem"}}
+                                                    >
+                                                    Não
+                                                </Text>
+                                            </Radio>
+                                        </RadioGroup>
+                                        {!!errors.presenceAtTheEvent && (
+                                            <FormErrorMessage>
+                                                {errors.presenceAtTheEvent?.message}
+                                            </FormErrorMessage>
+                                        )}
+                                    </FormControl>
+                                </GridItem>
+                                {
+                                    getValues('presenceAtTheEvent') === 'Y' && (
+                                        <GridItem >
+                                            <InputUpload
+                                                openModal={onOpenVaccineCard}
+                                                filesData={filesData}
+                                                deleteAttachment={deleteAttachment}
+                                                urlFile={urlFile}
+                                                />
+                                        </GridItem>
+                                    )
+                                }
+                            </>
                         )
                     }
                     <Flex

@@ -15,13 +15,14 @@ type ModalProps = ChakraModalProps & {
   header?: ReactElement
   children: ReactElement
   footer?: ReactElement
+  backgroundModalContent?: string
 }
 
-const Modal: React.FC<ModalProps> = ({ header, children, footer, ...rest }) => {
+const Modal: React.FC<ModalProps> = ({ header, children, footer, backgroundModalContent, ...rest }) => {
   return (
     <ChakraModal isCentered scrollBehavior="inside" {...rest}>
       <ModalOverlay />
-      <ModalContent borderRadius={2} p={5}>
+      <ModalContent borderRadius={2} p={5} backgroundImage={backgroundModalContent}>
         {header && (
           <ModalHeader fontSize="lg" color="#0c6a6b">
             {header}

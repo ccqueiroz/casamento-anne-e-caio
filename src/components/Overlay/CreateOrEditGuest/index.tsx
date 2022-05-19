@@ -22,7 +22,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import InputMask from 'react-input-mask';
 import { FileWithPreview } from '../../../data/model/Files';
-import { GuestResponseModal } from '../../../data/model/UserResponseModal';
 import { isPhone } from 'brazilian-values';
 import InputUpload from '../../Form/InputUpload';
 import { VaccineCard } from '../VaccineCard';
@@ -144,6 +143,7 @@ const CreateOrEditGuest: React.FC<ModalCreateOrEditGuestProps> = ({
     return (
         <Modal
             size={renderSizeModal}
+            backgroundModalContent="url(/images/layout/bg-top.png)"
             header={
                 <Box>
                     <Text

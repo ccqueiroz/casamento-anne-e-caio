@@ -28,6 +28,15 @@ const CountDown: React.FC = () => {
             clearInterval(Number(refTime.current));
         }
         refTime.current = setInterval(() => {
+            if (weddingDate.getTime() < new Date().getTime()) {
+                setCounterDate({
+                    day: 0,
+                    hour: 0,
+                    minutes: 0,
+                    seconds: 0,
+                });
+                return
+            }
             const timeLeft = weddingDate.getTime() - new Date().getTime()
             const newDate = new Date(timeLeft)
             setCounterDate({
